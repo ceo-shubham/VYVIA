@@ -1,9 +1,12 @@
-# Cloudflare Pages / Workers Configuration for VYVIA
+# Cloudflare Configuration for VYVIA (Supports both Workers with Assets & Pages)
 name = "vyvia"
+main = "src/worker.ts"
 compatibility_date = "2024-04-01"
-pages_build_output_dir = "dist"
 
-# Optional bindings if user sets up KV for waitlist storage on Cloudflare Dashboard:
-# [[kv_namespaces]]
-# binding = "WAITLIST_KV"
-# id = "your-kv-namespace-id"
+# Static site build assets directory
+[assets]
+directory = "./dist"
+binding = "ASSETS"
+
+# For Cloudflare Pages builds
+pages_build_output_dir = "dist"
