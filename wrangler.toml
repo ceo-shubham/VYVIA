@@ -1,16 +1,12 @@
-# Cloudflare Configuration for VYVIA (Supports both Workers with Assets & Pages)
+# Cloudflare Configuration for VYVIA
 name = "vyvia"
 main = "src/worker.ts"
 compatibility_date = "2024-04-01"
 
-# Automatically triggers build when wrangler deploy is run
 [build]
 command = "npm run build"
 
-# Static site build assets directory
 [assets]
 directory = "./dist"
 binding = "ASSETS"
-
-# For Cloudflare Pages builds
-pages_build_output_dir = "dist"
+not_found_handling = "single-page-application"
