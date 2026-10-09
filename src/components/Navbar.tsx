@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Shield, Sparkles, ShoppingBag, Menu, X, FileText, Activity, Cloud } from 'lucide-react';
+import { Sparkles, ShoppingBag, Menu, X, Cloud } from 'lucide-react';
 
 interface NavbarProps {
   onOpenSampleModal: (defaultFlow?: string) => void;
@@ -17,11 +17,12 @@ export const Navbar: React.FC<NavbarProps> = ({
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navLinks = [
-    { label: 'The Science', href: '#science' },
+    { label: 'What is VYVIA?', href: '#what-is-it' },
+    { label: 'How It Works', href: '#how-it-works' },
     { label: 'pH Simulator', href: '#simulator' },
     { label: '4-Pillar Matrix', href: '#matrix' },
     { label: 'Pad Anatomy', href: '#layers' },
-    { label: 'pH Quiz', href: '#quiz' },
+    { label: 'Diagnostic Quiz', href: '#quiz' },
     { label: 'Products', href: '#products' },
     { label: 'Patent File', href: '#patent' },
   ];
@@ -45,12 +46,12 @@ export const Navbar: React.FC<NavbarProps> = ({
         </a>
 
         {/* Desktop Nav */}
-        <nav className="hidden lg:flex items-center gap-7">
+        <nav className="hidden xl:flex items-center gap-6">
           {navLinks.map((link) => (
             <a
               key={link.label}
               href={link.href}
-              className="text-sm font-medium text-vyvia-charcoal/80 hover:text-vyvia-forest transition-colors hover:border-b-2 hover:border-vyvia-leaf/70 py-1"
+              className="text-xs font-semibold text-vyvia-charcoal/80 hover:text-vyvia-forest transition-colors hover:border-b-2 hover:border-vyvia-leaf/70 py-1"
             >
               {link.label}
             </a>
@@ -65,7 +66,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             title="Deploy free on Cloudflare"
           >
             <Cloud className="w-3.5 h-3.5 text-vyvia-leaf" />
-            <span>Cloudflare Free Plan</span>
+            <span>Cloudflare Free</span>
           </button>
 
           <button
@@ -73,7 +74,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             className="flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold bg-vyvia-forest text-vyvia-ivory hover:bg-vyvia-leaf transition-all shadow-sm hover:shadow"
           >
             <Sparkles className="w-3.5 h-3.5 text-vyvia-rose" />
-            <span>Claim Free Sample</span>
+            <span>Claim Free Trial Kit</span>
           </button>
 
           <button
@@ -116,7 +117,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-vyvia-ivory border-b border-vyvia-mint px-6 py-5 shadow-lg space-y-4">
+        <div className="xl:hidden bg-vyvia-ivory border-b border-vyvia-mint px-6 py-5 shadow-lg space-y-4">
           <div className="flex flex-col space-y-3">
             {navLinks.map((link) => (
               <a
@@ -137,7 +138,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               }}
               className="w-full py-2.5 rounded-full text-sm font-semibold bg-vyvia-forest text-vyvia-cream text-center shadow"
             >
-              Claim Free Sample Pack
+              Claim Free Trial Kit (₹0)
             </button>
             <button
               onClick={() => {
@@ -146,7 +147,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               }}
               className="w-full py-2 rounded-full text-xs font-semibold bg-vyvia-mint text-vyvia-forest text-center flex items-center justify-center gap-2"
             >
-              <Cloud className="w-4 h-4" /> Cloudflare Deployment Guide
+              <Cloud className="w-4 h-4" /> Cloudflare Free Deployment Guide
             </button>
           </div>
         </div>

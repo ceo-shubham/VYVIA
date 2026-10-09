@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
+import { LaunchBanner } from './components/LaunchBanner';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
+import { WhatIsVyvia } from './components/WhatIsVyvia';
+import { HowItWorksSteps } from './components/HowItWorksSteps';
+import { CustomerTestimonials } from './components/CustomerTestimonials';
 import { PhSimulator } from './components/PhSimulator';
 import { ScienceMatrix } from './components/ScienceMatrix';
 import { PadLayersVisualizer } from './components/PadLayersVisualizer';
@@ -10,6 +14,7 @@ import { PatentWhitepaper } from './components/PatentWhitepaper';
 import { PreOrderModal } from './components/PreOrderModal';
 import { CartDrawer, CartEntry } from './components/CartDrawer';
 import { CloudflareDeployGuideModal } from './components/CloudflareDeployGuideModal';
+import { WhatsAppButton } from './components/WhatsAppButton';
 import { Footer } from './components/Footer';
 import { ProductItem } from './types';
 import { Sparkles, Cloud } from 'lucide-react';
@@ -77,6 +82,9 @@ export function App() {
 
   return (
     <div className="min-h-screen bg-vyvia-ivory text-vyvia-charcoal font-sans selection:bg-vyvia-mint selection:text-vyvia-forest">
+      {/* Top Market Launch Announcement Bar */}
+      <LaunchBanner onClaimTrial={() => handleOpenSampleModal('medium')} />
+
       {/* Toast Alert */}
       {toastMessage && (
         <div className="fixed top-24 right-5 z-50 bg-vyvia-forest text-vyvia-cream px-4 py-2.5 rounded-xl shadow-lg border border-vyvia-mint/30 text-xs font-semibold flex items-center gap-2 animate-bounce">
@@ -85,7 +93,7 @@ export function App() {
         </div>
       )}
 
-      {/* Navigation */}
+      {/* Main Navbar */}
       <Navbar
         onOpenSampleModal={handleOpenSampleModal}
         onOpenCart={() => setIsCartOpen(true)}
@@ -97,24 +105,37 @@ export function App() {
         {/* Hero Section */}
         <Hero
           onOpenSampleModal={() => handleOpenSampleModal('medium')}
-          onScrollToSimulator={() => scrollToSection('simulator')}
+          onScrollToWhatIsIt={() => scrollToSection('what-is-it')}
+          onScrollToHowItWorks={() => scrollToSection('how-it-works')}
           onScrollToPatent={() => scrollToSection('patent')}
         />
 
-        {/* Section 1: Interactive Flow & pH Simulator (Pages 2 & 3) */}
+        {/* Essential Market Clarifier: What is it? What is the use? What is the work? */}
+        <WhatIsVyvia
+          onClaimSample={() => handleOpenSampleModal('medium')}
+          onExploreHowItWorks={() => scrollToSection('how-it-works')}
+        />
+
+        {/* How It Works in 3 Simple Steps + Virtual Litmus Test Simulator */}
+        <HowItWorksSteps />
+
+        {/* Customer Proof & Pilot Study Metrics */}
+        <CustomerTestimonials />
+
+        {/* Section: Interactive Flow & pH Simulator (Pages 2 & 3 Lab) */}
         <PhSimulator
-          onSelectProductForFlow={(flowId) => {
+          onSelectProductForFlow={() => {
             scrollToSection('products');
           }}
         />
 
-        {/* Section 2: 4-Pillar Problem-Solution Matrix (Page 4) */}
+        {/* Section: 4-Pillar Problem-Solution Matrix (Page 4 of Patent) */}
         <ScienceMatrix />
 
-        {/* Section 3: 5-Tier Biomaterial Layer Visualizer */}
+        {/* Section: 5-Tier Biomaterial Layer Visualizer (Pad Anatomy) */}
         <PadLayersVisualizer />
 
-        {/* Section 4: Self-Assessment Vulvar Diagnostic Quiz */}
+        {/* Section: Self-Assessment Vulvar Irritation & pH Diagnostic Quiz */}
         <AssessmentQuiz
           onSelectProduct={(productId) => {
             scrollToSection(productId);
@@ -124,13 +145,13 @@ export function App() {
           }}
         />
 
-        {/* Section 5: Products & Formulations Lineup */}
+        {/* Section: Product Lineup & Formulations */}
         <ProductCatalog
           onAddToCart={handleAddToCart}
           onClaimSample={(flow) => handleOpenSampleModal(flow)}
         />
 
-        {/* Section 6: Official Patent Brief & Inventors Section */}
+        {/* Section: Official Patent Brief & Inventors Whitepaper */}
         <PatentWhitepaper />
       </main>
 
@@ -155,8 +176,12 @@ export function App() {
         onClose={() => setIsDeployGuideOpen(false)}
       />
 
-      {/* Floating CTA bottom-right */}
-      <div className="fixed bottom-6 right-6 z-30 flex flex-col gap-2">
+      {/* Floating Action Buttons bottom-right */}
+      <div className="fixed bottom-6 right-6 z-30 flex flex-col gap-2.5 items-end">
+        {/* WhatsApp Chat Support */}
+        <WhatsAppButton />
+
+        {/* Cloudflare Deployment Guide Button */}
         <button
           onClick={() => setIsDeployGuideOpen(true)}
           className="p-3 bg-white text-vyvia-forest rounded-full shadow-lg border border-vyvia-mint hover:bg-vyvia-mint/50 transition-transform hover:scale-105 flex items-center justify-center group"
@@ -165,13 +190,14 @@ export function App() {
           <Cloud className="w-5 h-5 text-vyvia-leaf" />
         </button>
 
+        {/* Free Trial CTA */}
         <button
           onClick={() => handleOpenSampleModal('medium')}
           className="px-4 py-3 bg-vyvia-forest text-vyvia-cream rounded-full shadow-elevated border border-vyvia-leaf hover:bg-vyvia-leaf transition-transform hover:scale-105 flex items-center gap-2 font-medium text-xs"
         >
           <Sparkles className="w-4 h-4 text-vyvia-rose" />
-          <span className="hidden sm:inline">Free Sample Pack</span>
-          <span className="sm:hidden">Sample</span>
+          <span className="hidden sm:inline">Free Trial Kit (₹0)</span>
+          <span className="sm:hidden">Trial (₹0)</span>
         </button>
       </div>
 
