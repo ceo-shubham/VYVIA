@@ -45,13 +45,24 @@ export interface ProductItem {
   tagline: string;
   bufferPhRange: string;
   targetInterfacePh: string;
-  packCount: number;
-  price: number;
-  originalPrice: number;
+  packCount?: number;
+  price?: number;
+  originalPrice?: number;
   features: string[];
   bestFor: string;
   badge?: string;
   absorbencyBars: number;
+  stageStatus?: string;
+  researchCode?: string;
+}
+
+export interface RoadmapStage {
+  step: string;
+  title: string;
+  status: 'completed' | 'current' | 'upcoming';
+  timeframe: string;
+  description: string;
+  highlights: string[];
 }
 
 export interface QuizQuestion {

@@ -1,30 +1,23 @@
 import React, { useState } from 'react';
-import { Sparkles, ShoppingBag, Menu, X, Cloud } from 'lucide-react';
+import { Sparkles, Menu, X, FlaskConical, ArrowRight } from 'lucide-react';
 
 interface NavbarProps {
-  onOpenSampleModal: (defaultFlow?: string) => void;
-  onOpenCart: () => void;
-  cartCount: number;
-  onOpenDeployGuide: () => void;
+  onOpenEarlyAccess: (defaultFlow?: string) => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
-  onOpenSampleModal,
-  onOpenCart,
-  cartCount,
-  onOpenDeployGuide,
+  onOpenEarlyAccess,
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navLinks = [
-    { label: 'What is VYVIA?', href: '#what-is-it' },
-    { label: 'How It Works', href: '#how-it-works' },
-    { label: 'pH Simulator', href: '#simulator' },
-    { label: '4-Pillar Matrix', href: '#matrix' },
+    { label: 'The Innovation', href: '#what-is-it' },
+    { label: 'The Science', href: '#how-it-works' },
+    { label: 'pH Lab Simulator', href: '#simulator' },
     { label: 'Pad Anatomy', href: '#layers' },
-    { label: 'Diagnostic Quiz', href: '#quiz' },
-    { label: 'Products', href: '#products' },
-    { label: 'Patent File', href: '#patent' },
+    { label: 'Formulations', href: '#formulations' },
+    { label: 'R&D Roadmap', href: '#roadmap' },
+    { label: 'Patent Brief', href: '#patent' },
   ];
 
   return (
@@ -36,9 +29,14 @@ export const Navbar: React.FC<NavbarProps> = ({
             V
           </div>
           <div className="flex flex-col">
-            <span className="font-serif text-2xl font-semibold tracking-wider text-vyvia-forest uppercase leading-tight">
-              VYVIA
-            </span>
+            <div className="flex items-center gap-2">
+              <span className="font-serif text-2xl font-semibold tracking-wider text-vyvia-forest uppercase leading-tight">
+                VYVIA
+              </span>
+              <span className="hidden sm:inline-block px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold uppercase tracking-wider">
+                Pre-Launch
+              </span>
+            </div>
             <span className="text-[10px] tracking-widest text-vyvia-sage font-medium uppercase">
               pH Balancing Protective Layer
             </span>
@@ -58,52 +56,30 @@ export const Navbar: React.FC<NavbarProps> = ({
           ))}
         </nav>
 
-        {/* Action Buttons */}
+        {/* Action CTA */}
         <div className="hidden md:flex items-center gap-3">
-          <button
-            onClick={onOpenDeployGuide}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-vyvia-mint/70 text-vyvia-forest border border-vyvia-leaf/20 hover:bg-vyvia-mint transition-colors"
-            title="Deploy free on Cloudflare"
-          >
-            <Cloud className="w-3.5 h-3.5 text-vyvia-leaf" />
-            <span>Cloudflare Free</span>
-          </button>
+          <div className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-vyvia-mint/60 text-vyvia-forest border border-vyvia-leaf/20">
+            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+            <span>R&amp;D Phase 3</span>
+          </div>
 
           <button
-            onClick={() => onOpenSampleModal()}
-            className="flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold bg-vyvia-forest text-vyvia-ivory hover:bg-vyvia-leaf transition-all shadow-sm hover:shadow"
+            onClick={() => onOpenEarlyAccess()}
+            className="flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold bg-vyvia-forest text-vyvia-cream hover:bg-vyvia-leaf transition-all shadow-sm hover:shadow group"
           >
-            <Sparkles className="w-3.5 h-3.5 text-vyvia-rose" />
-            <span>Claim Free Trial Kit</span>
-          </button>
-
-          <button
-            onClick={onOpenCart}
-            className="relative p-2 rounded-full text-vyvia-forest hover:bg-vyvia-mint/50 transition-colors"
-            aria-label="View Cart"
-          >
-            <ShoppingBag className="w-5 h-5" />
-            {cartCount > 0 && (
-              <span className="absolute -top-1 -right-1 w-5 h-5 bg-vyvia-coral text-white text-[11px] font-bold rounded-full flex items-center justify-center animate-pulse">
-                {cartCount}
-              </span>
-            )}
+            <Sparkles className="w-3.5 h-3.5 text-vyvia-rose group-hover:rotate-12 transition-transform" />
+            <span>Join VIP Waitlist</span>
+            <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
           </button>
         </div>
 
         {/* Mobile menu trigger */}
         <div className="flex md:hidden items-center gap-2">
           <button
-            onClick={onOpenCart}
-            className="relative p-2 text-vyvia-forest"
-            aria-label="View Cart"
+            onClick={() => onOpenEarlyAccess()}
+            className="px-3 py-1.5 rounded-full text-xs font-semibold bg-vyvia-forest text-vyvia-cream"
           >
-            <ShoppingBag className="w-5 h-5" />
-            {cartCount > 0 && (
-              <span className="absolute -top-1 -right-1 w-4 h-4 bg-vyvia-coral text-white text-[10px] font-bold rounded-full flex items-center justify-center">
-                {cartCount}
-              </span>
-            )}
+            Waitlist
           </button>
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -134,20 +110,12 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               onClick={() => {
                 setMobileMenuOpen(false);
-                onOpenSampleModal();
+                onOpenEarlyAccess();
               }}
-              className="w-full py-2.5 rounded-full text-sm font-semibold bg-vyvia-forest text-vyvia-cream text-center shadow"
+              className="w-full py-2.5 rounded-full text-sm font-semibold bg-vyvia-forest text-vyvia-cream text-center shadow flex items-center justify-center gap-2"
             >
-              Claim Free Trial Kit (₹0)
-            </button>
-            <button
-              onClick={() => {
-                setMobileMenuOpen(false);
-                onOpenDeployGuide();
-              }}
-              className="w-full py-2 rounded-full text-xs font-semibold bg-vyvia-mint text-vyvia-forest text-center flex items-center justify-center gap-2"
-            >
-              <Cloud className="w-4 h-4" /> Cloudflare Free Deployment Guide
+              <Sparkles className="w-4 h-4 text-vyvia-rose" />
+              <span>Join VIP Waitlist (Pre-Launch)</span>
             </button>
           </div>
         </div>

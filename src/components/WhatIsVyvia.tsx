@@ -108,7 +108,7 @@ export const WhatIsVyvia: React.FC<WhatIsVyviaProps> = ({
                     onClick={onClaimSample}
                     className="px-5 py-2.5 rounded-full bg-vyvia-leaf text-white font-semibold text-xs hover:bg-vyvia-sage transition-colors"
                   >
-                    Claim Free 2-Pad Trial Box
+                    Request Priority Early Access
                   </button>
                 </div>
               </div>
@@ -421,14 +421,14 @@ export const WhatIsVyvia: React.FC<WhatIsVyviaProps> = ({
                 Ready to Experience a Rash-Free Period?
               </h4>
               <p className="text-xs text-vyvia-charcoal/70 max-w-md mx-auto">
-                Join the first 5,000 women receiving our launch trial pack. Backed by the patent filing of Anshika &amp; Shubham.
+                Join our VIP Early Access circle as we prepare for worldwide release. Technology authored by inventors Anshika &amp; Shubham.
               </p>
               <button
                 onClick={onClaimSample}
                 className="px-6 py-3 rounded-full bg-vyvia-forest text-vyvia-cream font-semibold text-xs hover:bg-vyvia-leaf transition-all shadow-md inline-flex items-center gap-2"
               >
                 <Sparkles className="w-4 h-4 text-vyvia-rose" />
-                <span>Claim Your Free Launch Sample Box</span>
+                <span>Join VIP Early Access Waitlist</span>
               </button>
             </div>
           </div>

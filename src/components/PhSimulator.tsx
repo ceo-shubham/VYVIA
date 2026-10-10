@@ -20,7 +20,7 @@ interface PhSimulatorProps {
 export const PhSimulator: React.FC<PhSimulatorProps> = ({ onSelectProductForFlow }) => {
   const [selectedFlowId, setSelectedFlowId] = useState<FlowStageId>('medium');
   const [sliderPh, setSliderPh] = useState<number>(7.1);
-  const [showHindiNotes, setShowHindiNotes] = useState<boolean>(true);
+  const [showHindiNotes, setShowHindiNotes] = useState<boolean>(false);
 
   const currentStage = FLOW_STAGES.find((s) => s.id === selectedFlowId)!;
 

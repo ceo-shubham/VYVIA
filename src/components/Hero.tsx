@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
-import { Sparkles, ArrowRight, CheckCircle2, AlertTriangle, Award } from 'lucide-react';
+import { Sparkles, ArrowRight, CheckCircle2, AlertTriangle, Award, FlaskConical, Globe } from 'lucide-react';
 import { PATENT_METADATA } from '../data/scienceData';
 
 interface HeroProps {
-  onOpenSampleModal: () => void;
+  onOpenEarlyAccess: () => void;
   onScrollToWhatIsIt: () => void;
   onScrollToHowItWorks: () => void;
   onScrollToPatent: () => void;
 }
 
 export const Hero: React.FC<HeroProps> = ({
-  onOpenSampleModal,
+  onOpenEarlyAccess,
   onScrollToWhatIsIt,
   onScrollToHowItWorks,
   onScrollToPatent,
@@ -18,28 +18,29 @@ export const Hero: React.FC<HeroProps> = ({
   const [activeTab, setActiveTab] = useState<'ordinary' | 'vyvia'>('vyvia');
 
   return (
-    <section className="relative overflow-hidden pt-6 pb-16 lg:pt-12 lg:pb-20">
+    <section className="relative overflow-hidden pt-8 pb-16 lg:pt-16 lg:pb-24">
       {/* Background gradients */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[550px] bg-gradient-to-b from-vyvia-mint/30 via-vyvia-blush/20 to-transparent blur-3xl -z-10 pointer-events-none" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1100px] h-[600px] bg-gradient-to-b from-vyvia-mint/35 via-vyvia-blush/20 to-transparent blur-3xl -z-10 pointer-events-none" />
       <div className="absolute -top-24 right-0 w-96 h-96 bg-vyvia-rose/15 rounded-full blur-3xl -z-10 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Patent & Launch Badge */}
-        <div className="flex flex-wrap items-center justify-center gap-2 mb-6">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-vyvia-forest/5 border border-vyvia-forest/15 text-vyvia-forest text-xs font-semibold backdrop-blur-sm shadow-sm">
+        {/* Patent & Pre-Launch Development Badges */}
+        <div className="flex flex-wrap items-center justify-center gap-2.5 mb-6">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-vyvia-forest/5 border border-vyvia-forest/15 text-vyvia-forest text-xs font-semibold backdrop-blur-sm shadow-sm">
             <Award className="w-4 h-4 text-vyvia-gold" />
             <span>{PATENT_METADATA.filingEntity}</span>
             <span className="w-1 h-1 rounded-full bg-vyvia-forest/40"></span>
-            <span className="text-vyvia-sage font-medium">Patent-Pending Technology</span>
+            <span className="text-vyvia-sage font-medium">Patent-Pending Invention</span>
           </div>
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100/90 border border-emerald-300 text-emerald-800 text-[11px] font-bold">
-            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
-            <span>100% Rash-Free Cycle Guarantee</span>
+
+          <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-amber-50 border border-amber-300 text-amber-900 text-xs font-bold shadow-sm">
+            <FlaskConical className="w-3.5 h-3.5 text-amber-700 animate-pulse" />
+            <span>Under Active Development • Global Launch Soon</span>
           </div>
         </div>
 
-        {/* Main Title & Value Proposition */}
-        <div className="text-center max-w-4xl mx-auto space-y-5">
+        {/* Main Title & Global Positioning */}
+        <div className="text-center max-w-4xl mx-auto space-y-6">
           <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-light text-vyvia-dark tracking-tight leading-[1.12]">
             Period rashes are NOT your fault.{' '}
             <br className="hidden sm:inline" />
@@ -47,52 +48,62 @@ export const Hero: React.FC<HeroProps> = ({
             <span className="italic font-normal underline decoration-vyvia-coral/50 decoration-wavy underline-offset-8">
               chemical flaw
             </span>{' '}
-            of ordinary pads.
+            of ordinary sanitary pads.
           </h1>
 
           <p className="text-base sm:text-lg text-vyvia-charcoal/80 max-w-2xl mx-auto font-normal leading-relaxed">
-            Menstrual blood is naturally alkaline (<strong className="text-vyvia-dark font-semibold">pH 7.4</strong>), which dissolves the protective acidic barrier (<strong className="text-emerald-800 font-semibold">pH 4.8</strong>) of your skin. 
-            <strong> VYVIA is the world's first sanitary pad with an active pH buffer:</strong> it instantly neutralizes blood upon contact, preventing rashes, burning, and odor before they start.
+            Menstrual fluid is naturally alkaline (<strong className="text-vyvia-dark font-semibold">pH 7.4</strong>), which dissolves the delicate acidic barrier (<strong className="text-emerald-800 font-semibold">pH 4.8</strong>) of intimate skin. 
+            <strong> VYVIA is a bio-engineered sanitary pad featuring an active pH buffer:</strong> it dynamically neutralizes alkalinity upon absorption, preserving the natural acid mantle, halting tissue degradation, and eliminating bacterial odor.
           </p>
+
+          {/* Development Status Callout */}
+          <div className="max-w-xl mx-auto py-2 px-4 rounded-xl bg-white/70 border border-vyvia-mint/80 shadow-sm text-xs text-vyvia-charcoal/85 flex items-center justify-center gap-2">
+            <Globe className="w-4 h-4 text-vyvia-leaf shrink-0" />
+            <span>
+              <strong>Note:</strong> Currently in pre-launch engineering and clinical pilot trials. Commercial retail will open globally soon.
+            </span>
+          </div>
 
           {/* Action CTAs */}
           <div className="pt-2 flex flex-wrap items-center justify-center gap-3 sm:gap-4">
             <button
-              onClick={onOpenSampleModal}
-              className="px-7 py-3.5 rounded-full bg-vyvia-forest text-vyvia-cream font-medium text-sm sm:text-base hover:bg-vyvia-leaf transition-all shadow-md hover:shadow-lg flex items-center gap-2.5 group"
+              onClick={onOpenEarlyAccess}
+              className="px-8 py-3.5 rounded-full bg-vyvia-forest text-vyvia-cream font-semibold text-sm sm:text-base hover:bg-vyvia-leaf transition-all shadow-md hover:shadow-lg flex items-center gap-2.5 group"
             >
               <Sparkles className="w-4 h-4 text-vyvia-rose group-hover:rotate-12 transition-transform" />
-              <span>Claim Free 2-Pad Trial Kit (₹0)</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+              <span>Join VIP Early Access Waitlist</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </button>
 
             <button
               onClick={onScrollToWhatIsIt}
-              className="px-6 py-3.5 rounded-full bg-vyvia-cream border border-vyvia-sand text-vyvia-dark font-medium text-sm sm:text-base hover:bg-white hover:border-vyvia-sage/40 transition-all shadow-sm flex items-center gap-2"
+              className="px-6 py-3.5 rounded-full bg-vyvia-cream border border-vyvia-sand text-vyvia-dark font-semibold text-sm sm:text-base hover:bg-white hover:border-vyvia-sage/40 transition-all shadow-sm flex items-center gap-2"
             >
-              <span>What is VYVIA &amp; What is the Use?</span>
+              <span>What is VYVIA &amp; Why We're Building It</span>
             </button>
 
             <button
               onClick={onScrollToHowItWorks}
               className="px-5 py-3 rounded-full text-vyvia-sage hover:text-vyvia-forest text-xs sm:text-sm font-semibold underline underline-offset-4 transition-colors"
             >
-              How It Works (Live Demo)
+              Live Science &amp; Reaction Demo
             </button>
           </div>
 
-          <div className="text-[11px] text-vyvia-sage flex items-center justify-center gap-4 pt-1 font-medium">
-            <span>✓ First 5,000 Sample Kits Free</span>
+          <div className="text-[11px] text-vyvia-sage flex flex-wrap items-center justify-center gap-3 pt-1 font-medium">
+            <span>✓ First Production Batch Reserved for Waitlist</span>
             <span>•</span>
-            <span>✓ Zero Fragrance or Toxic Bleach</span>
+            <span>✓ Zero Dioxins or Toxic Bleaches</span>
             <span>•</span>
-            <span>✓ Organic Bamboo Silk</span>
+            <span>✓ Micro-Perforated Organic Bamboo</span>
+            <span>•</span>
+            <span>✓ Clinical Pilot Cohort Validated</span>
           </div>
         </div>
 
         {/* Interactive Comparison Card in Hero */}
-        <div className="mt-12 max-w-4xl mx-auto">
-          <div className="glass-panel rounded-2xl p-4 sm:p-6 shadow-soft border border-vyvia-mint/80">
+        <div className="mt-14 max-w-4xl mx-auto">
+          <div className="glass-panel rounded-2xl p-5 sm:p-7 shadow-soft border border-vyvia-mint/80">
             {/* Toggle header */}
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pb-5 border-b border-vyvia-sand/70">
               <div className="flex items-center gap-2">
@@ -142,41 +153,41 @@ export const Hero: React.FC<HeroProps> = ({
                     <div className="w-[60%] bg-red-500 animate-pulse" title="Alkaline Hazard"></div>
                   </div>
                   <p className="text-xs text-red-900/90 leading-relaxed">
-                    <strong>Why it burns:</strong> Alkaline blood destroys skin lipids like harsh chemical soap. Flesh-eating MMP enzymes wake up and odor bacteria multiply.
+                    <strong>Why it burns:</strong> Alkaline blood dissolves protective skin lipids like harsh chemical detergent. Tissue-eating MMP enzymes activate and odor bacteria multiply unhindered.
                   </p>
                 </div>
 
                 <div className="md:col-span-7 space-y-2">
                   <div className="text-xs font-semibold text-vyvia-charcoal uppercase tracking-wider">
-                    Customer Experience with Ordinary Pads:
+                    Biological Impact of Ordinary Pads:
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
                     <div className="p-2.5 rounded-lg bg-white border border-red-100 flex items-start gap-2">
                       <AlertTriangle className="w-4 h-4 text-red-500 shrink-0 mt-0.5" />
                       <div>
-                        <div className="font-semibold text-red-950">Rashes &amp; Boils</div>
-                        <div className="text-vyvia-charcoal/70 text-[11px]">Lipid barrier stripped by basic fluid</div>
+                        <div className="font-semibold text-red-950">Rashes &amp; Burning</div>
+                        <div className="text-vyvia-charcoal/70 text-[11px]">Acid mantle stripped by alkaline fluid</div>
                       </div>
                     </div>
                     <div className="p-2.5 rounded-lg bg-white border border-red-100 flex items-start gap-2">
                       <AlertTriangle className="w-4 h-4 text-red-500 shrink-0 mt-0.5" />
                       <div>
-                        <div className="font-semibold text-red-950">Stinging When Peeing</div>
-                        <div className="text-vyvia-charcoal/70 text-[11px]">Urine contacts raw, stripped skin</div>
+                        <div className="font-semibold text-red-950">Micro-Excoriation</div>
+                        <div className="text-vyvia-charcoal/70 text-[11px]">Macerated tissue stings upon contact</div>
                       </div>
                     </div>
                     <div className="p-2.5 rounded-lg bg-white border border-red-100 flex items-start gap-2">
                       <AlertTriangle className="w-4 h-4 text-red-500 shrink-0 mt-0.5" />
                       <div>
                         <div className="font-semibold text-red-950">Stale Menstrual Odor</div>
-                        <div className="text-vyvia-charcoal/70 text-[11px]">Anaerobic bacteria bloom in alkaline pad</div>
+                        <div className="text-vyvia-charcoal/70 text-[11px]">Anaerobic bacteria proliferate in alkaline moisture</div>
                       </div>
                     </div>
                     <div className="p-2.5 rounded-lg bg-white border border-red-100 flex items-start gap-2">
                       <AlertTriangle className="w-4 h-4 text-red-500 shrink-0 mt-0.5" />
                       <div>
-                        <div className="font-semibold text-red-950">Chafing Against Thighs</div>
-                        <div className="text-vyvia-charcoal/70 text-[11px]">Stiff plastic mesh cuts into groins</div>
+                        <div className="font-semibold text-red-950">Chafing &amp; Heat</div>
+                        <div className="text-vyvia-charcoal/70 text-[11px]">Stiff bleached plastic traps heat and sweat</div>
                       </div>
                     </div>
                   </div>
@@ -198,41 +209,41 @@ export const Hero: React.FC<HeroProps> = ({
                     <div className="w-[85%] bg-emerald-600" title="Safe Acid Mantle Locked"></div>
                   </div>
                   <p className="text-xs text-emerald-950 leading-relaxed">
-                    <strong>Optimal Comfort:</strong> VYVIA's patent buffer converts alkaline blood down to pH 4.8 in &lt;1.2 seconds. Skin stays 100% calm and rash-free.
+                    <strong>Optimal Comfort:</strong> VYVIA's patent buffer converts alkaline blood down to pH 4.8 in &lt;1.2 seconds. Skin remains protected, soothing, and 100% rash-free.
                   </p>
                 </div>
 
                 <div className="md:col-span-7 space-y-2">
                   <div className="text-xs font-semibold text-vyvia-forest uppercase tracking-wider">
-                    Customer Experience with VYVIA:
+                    Biological Impact of VYVIA Bio-Shield:
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
                     <div className="p-2.5 rounded-lg bg-white border border-emerald-200 flex items-start gap-2">
                       <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                       <div>
-                        <div className="font-semibold text-vyvia-dark">100% Zero Rashes</div>
-                        <div className="text-vyvia-charcoal/70 text-[11px]">Natural acid mantle shield kept intact</div>
+                        <div className="font-semibold text-vyvia-dark">Zero Chemical Rashes</div>
+                        <div className="text-vyvia-charcoal/70 text-[11px]">Intact acid mantle shields delicate epithelium</div>
                       </div>
                     </div>
                     <div className="p-2.5 rounded-lg bg-white border border-emerald-200 flex items-start gap-2">
                       <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                       <div>
-                        <div className="font-semibold text-vyvia-dark">Zero Burning Sensation</div>
-                        <div className="text-vyvia-charcoal/70 text-[11px]">Washing or urinating never hurts</div>
+                        <div className="font-semibold text-vyvia-dark">MMP Proteases Dormant</div>
+                        <div className="text-vyvia-charcoal/70 text-[11px]">Enzymes cannot dissolve keratin in acidic pH</div>
                       </div>
                     </div>
                     <div className="p-2.5 rounded-lg bg-white border border-emerald-200 flex items-start gap-2">
                       <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                       <div>
-                        <div className="font-semibold text-vyvia-dark">Zero Odor (No Perfume)</div>
-                        <div className="text-vyvia-charcoal/70 text-[11px]">Anaerobic bacteria sleep dormant</div>
+                        <div className="font-semibold text-vyvia-dark">Zero Odor (No Synthetic Scents)</div>
+                        <div className="text-vyvia-charcoal/70 text-[11px]">Zinc-polyphenol halts anaerobic microbial growth</div>
                       </div>
                     </div>
                     <div className="p-2.5 rounded-lg bg-white border border-emerald-200 flex items-start gap-2">
                       <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                       <div>
-                        <div className="font-semibold text-vyvia-dark">Frictionless Bamboo Silk</div>
-                        <div className="text-vyvia-charcoal/70 text-[11px]">100% Unbleached, zero plastic friction</div>
+                        <div className="font-semibold text-vyvia-dark">Frictionless Organic Bamboo</div>
+                        <div className="text-vyvia-charcoal/70 text-[11px]">Micro-perforated natural silk, zero abrasions</div>
                       </div>
                     </div>
                   </div>
@@ -251,18 +262,18 @@ export const Hero: React.FC<HeroProps> = ({
           </div>
           <div className="glass-panel p-4 rounded-xl text-center border border-vyvia-mint/50">
             <div className="font-serif text-3xl sm:text-4xl font-semibold text-vyvia-forest">85%</div>
-            <div className="text-xs font-semibold text-vyvia-charcoal uppercase tracking-wider mt-1">Pathogen Dormancy</div>
-            <div className="text-[11px] text-vyvia-sage mt-0.5">Stops Odor Without Fragrance</div>
+            <div className="text-xs font-semibold text-vyvia-charcoal uppercase tracking-wider mt-1">Pathogen Suppression</div>
+            <div className="text-[11px] text-vyvia-sage mt-0.5">Zero Artificial Perfumes</div>
           </div>
           <div className="glass-panel p-4 rounded-xl text-center border border-vyvia-mint/50">
             <div className="font-serif text-3xl sm:text-4xl font-semibold text-vyvia-forest">85%</div>
-            <div className="text-xs font-semibold text-vyvia-charcoal uppercase tracking-wider mt-1">MMP Enzyme Inactivation</div>
-            <div className="text-[11px] text-vyvia-sage mt-0.5">Prevents Skin Peeling / Maceration</div>
+            <div className="text-xs font-semibold text-vyvia-charcoal uppercase tracking-wider mt-1">MMP Protease Arrest</div>
+            <div className="text-[11px] text-vyvia-sage mt-0.5">Prevents Tissue Peeling</div>
           </div>
           <div className="glass-panel p-4 rounded-xl text-center border border-vyvia-mint/50">
             <div className="font-serif text-3xl sm:text-4xl font-semibold text-vyvia-forest">&lt; 1.2s</div>
             <div className="text-xs font-semibold text-vyvia-charcoal uppercase tracking-wider mt-1">Capillary Wicking Speed</div>
-            <div className="text-[11px] text-vyvia-sage mt-0.5">Micro-grooved ADL Core</div>
+            <div className="text-[11px] text-vyvia-sage mt-0.5">Rapid Micro-Groove Draw</div>
           </div>
         </div>
       </div>

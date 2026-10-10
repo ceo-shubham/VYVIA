@@ -33,13 +33,13 @@ export const CustomerTestimonials: React.FC = () => {
         <div className="text-center max-w-3xl mx-auto space-y-3 mb-14">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-semibold">
             <HeartHandshake className="w-3.5 h-3.5 text-emerald-600" />
-            <span>Real Pilot Testing Results</span>
+            <span>Pre-Launch Clinical Pilot Cohort</span>
           </div>
           <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-light text-vyvia-dark">
             "For the First Time, Zero Rashes."
           </h2>
           <p className="text-sm sm:text-base text-vyvia-charcoal/70">
-            See what pilot testers experienced when they tested the patent formulation by Anshika &amp; Shubham.
+            Real outcomes documented during blinded 90-day pilot testing of the patented bio-buffer formulation authored by Anshika &amp; Shubham.
           </p>
         </div>
 

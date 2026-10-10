@@ -214,17 +214,18 @@ export const AssessmentQuiz: React.FC<AssessmentQuizProps> = ({
 
                 <div className="flex flex-wrap items-center gap-3 pt-2">
                   <button
-                    onClick={() => onSelectProduct(result.recommendedProduct.id)}
-                    className="px-5 py-2.5 rounded-full bg-vyvia-forest text-white text-xs sm:text-sm font-semibold hover:bg-vyvia-leaf transition-all shadow-sm"
+                    onClick={() => onRequestSampleForFlow(result.flowChoice)}
+                    className="px-6 py-2.5 rounded-full bg-vyvia-forest text-white text-xs sm:text-sm font-semibold hover:bg-vyvia-leaf transition-all shadow-sm flex items-center gap-1.5"
                   >
-                    View Product Details & Pre-Order (₹{result.recommendedProduct.price})
+                    <Sparkles className="w-3.5 h-3.5 text-vyvia-rose" />
+                    <span>Request Early Beta Allocation For This Profile</span>
                   </button>
 
                   <button
-                    onClick={() => onRequestSampleForFlow(result.flowChoice)}
+                    onClick={() => onSelectProduct(result.recommendedProduct.id)}
                     className="px-5 py-2.5 rounded-full bg-white border border-emerald-300 text-emerald-900 text-xs sm:text-sm font-semibold hover:bg-emerald-100 transition-colors"
                   >
-                    Request Free Sample Pack For This Flow
+                    Inspect Formulation Engineering
                   </button>
                 </div>
               </div>

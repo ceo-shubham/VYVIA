@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, Sparkles, CheckCircle2, Shield, AlertCircle, Loader2 } from 'lucide-react';
+import { X, Sparkles, CheckCircle2, Shield, AlertCircle, Loader2, UserCheck, Stethoscope, Globe } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { FlowStageId } from '../types';
 
@@ -14,14 +14,15 @@ export const PreOrderModal: React.FC<PreOrderModalProps> = ({
   onClose,
   defaultFlow = 'medium',
 }) => {
+  const [applicantType, setApplicantType] = useState<'individual' | 'clinical'>('individual');
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
-  const [city, setCity] = useState('');
-  const [flowProfile, setFlowProfile] = useState<FlowStageId | 'mixed'>((defaultFlow as any) || 'medium');
+  const [countryCity, setCountryCity] = useState('');
+  const [flowProfile, setFlowProfile] = useState<FlowStageId | 'all'>((defaultFlow as any) || 'medium');
   const [isTester, setIsTester] = useState(true);
   const [symptoms, setSymptoms] = useState<string[]>([
     'Burning & redness from regular pads',
-    'Post-period chafing'
+    'Post-period chafing & skin sensitivity'
   ]);
   const [notes, setNotes] = useState('');
   const [loading, setLoading] = useState(false);
@@ -41,7 +42,7 @@ export const PreOrderModal: React.FC<PreOrderModalProps> = ({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email || !fullName) {
-      setErrorMessage('Please fill in your name and email.');
+      setErrorMessage('Please fill in your name and email address.');
       return;
     }
 
@@ -49,15 +50,15 @@ export const PreOrderModal: React.FC<PreOrderModalProps> = ({
     setErrorMessage('');
 
     try {
-      // Send to Cloudflare Pages Functions endpoint
       const response = await fetch('/api/waitlist', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           fullName,
           email,
-          city,
+          city: countryCity,
           flowProfile,
+          applicantType,
           isTester,
           symptoms,
           notes,
@@ -75,266 +76,326 @@ export const PreOrderModal: React.FC<PreOrderModalProps> = ({
         setSuccessData(resData);
       } else {
         // Fallback simulation for local dev or static preview
-        const mockSubmissionId = 'VYV-' + Math.random().toString(36).substring(2, 9).toUpperCase();
+        const mockSubmissionId = 'VYV-GLOBAL-' + Math.random().toString(36).substring(2, 8).toUpperCase();
         setSuccessData({
           success: true,
           submissionId: mockSubmissionId,
           record: {
             fullName,
             email,
-            assignedSample: flowProfile === 'heavy' ? 'VYVIA Shield Max Sample Box' :
-                            flowProfile === 'light' ? 'VYVIA Feather Sample Box' : 'VYVIA Balance Sample Box'
+            assignedSample: flowProfile === 'heavy' ? 'VYVIA Shield Max™ Allocation' :
+                            flowProfile === 'light' ? 'VYVIA Feather™ Allocation' :
+                            flowProfile === 'all' ? 'The Complete Cycle Protocol™ Allocation' : 'VYVIA Balance™ Allocation'
           }
         });
       }
 
       confetti({
-        particleCount: 80,
-        spread: 70,
+        particleCount: 70,
+        spread: 60,
         origin: { y: 0.6 }
       });
-    } catch (err: any) {
-      // Graceful offline/local mode fallback
-      const mockSubmissionId = 'VYV-' + Math.random().toString(36).substring(2, 9).toUpperCase();
+    } catch {
+      // Graceful offline fallback
+      const mockSubmissionId = 'VYV-GLOBAL-' + Math.random().toString(36).substring(2, 8).toUpperCase();
       setSuccessData({
         success: true,
         submissionId: mockSubmissionId,
         record: {
           fullName,
           email,
-          assignedSample: flowProfile === 'heavy' ? 'VYVIA Shield Max Sample Box' :
-                          flowProfile === 'light' ? 'VYVIA Feather Sample Box' : 'VYVIA Balance Sample Box'
+          assignedSample: flowProfile === 'heavy' ? 'VYVIA Shield Max™ Allocation' :
+                          flowProfile === 'light' ? 'VYVIA Feather™ Allocation' :
+                          flowProfile === 'all' ? 'The Complete Cycle Protocol™ Allocation' : 'VYVIA Balance™ Allocation'
         }
-      });
-      confetti({
-        particleCount: 80,
-        spread: 70,
-        origin: { y: 0.6 }
       });
     } finally {
       setLoading(false);
     }
   };
 
+  const handleResetAndClose = () => {
+    setSuccessData(null);
+    onClose();
+  };
+
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-vyvia-dark/60 backdrop-blur-sm animate-fadeIn">
-      <div className="bg-vyvia-ivory rounded-2xl max-w-xl w-full max-h-[90vh] overflow-y-auto border border-vyvia-mint shadow-2xl relative p-6 sm:p-8">
-        {/* Close button */}
-        <button
-          onClick={onClose}
-          className="absolute top-5 right-5 p-2 rounded-full text-vyvia-charcoal/60 hover:text-vyvia-forest hover:bg-vyvia-sand/50 transition-colors"
-          aria-label="Close modal"
-        >
-          <X className="w-5 h-5" />
-        </button>
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fadeIn">
+      <div 
+        className="relative w-full max-w-xl bg-vyvia-ivory rounded-3xl shadow-2xl border border-vyvia-mint overflow-hidden max-h-[92vh] flex flex-col"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Header Bar */}
+        <div className="p-6 pb-4 bg-gradient-to-r from-vyvia-dark via-vyvia-forest to-vyvia-leaf text-vyvia-cream relative">
+          <button
+            onClick={handleResetAndClose}
+            className="absolute top-5 right-5 p-1.5 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
+            aria-label="Close modal"
+          >
+            <X className="w-5 h-5" />
+          </button>
 
-        {!successData ? (
-          <div>
-            {/* Header */}
-            <div className="space-y-2 mb-6">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-vyvia-forest/10 text-vyvia-forest text-xs font-semibold">
-                <Sparkles className="w-3.5 h-3.5 text-vyvia-gold" />
-                <span>Founder Circle & Sample Allocation</span>
-              </div>
-              <h3 className="font-serif text-2xl sm:text-3xl font-bold text-vyvia-dark">
-                Claim Your Free VYVIA Sample Pack
-              </h3>
-              <p className="text-xs sm:text-sm text-vyvia-charcoal/70">
-                Experience the patent-pending pH buffer formulation before national launch. Free sample delivered right to your door.
-              </p>
+          <div className="flex items-center gap-2 mb-2">
+            <span className="px-2.5 py-0.5 rounded-full bg-vyvia-rose/20 text-vyvia-rose text-[10px] font-bold uppercase tracking-wider border border-vyvia-rose/30">
+              Pre-Launch Application
+            </span>
+            <span className="text-vyvia-sand/70 text-xs">
+              Inventors Anshika &amp; Shubham
+            </span>
+          </div>
+
+          <h2 className="font-serif text-2xl sm:text-3xl font-light text-white">
+            VIP Early Access &amp; Waitlist
+          </h2>
+          <p className="text-xs text-vyvia-sand/80 mt-1 max-w-md">
+            Reserve your early allocation prior to commercial worldwide release. Zero purchase required today.
+          </p>
+
+          {/* Applicant Type Selector */}
+          {!successData && (
+            <div className="flex gap-2 pt-4">
+              <button
+                type="button"
+                onClick={() => setApplicantType('individual')}
+                className={`flex-1 py-1.5 px-3 rounded-xl text-xs font-semibold flex items-center justify-center gap-1.5 transition-all ${
+                  applicantType === 'individual'
+                    ? 'bg-white text-vyvia-forest shadow'
+                    : 'bg-white/10 text-vyvia-sand hover:bg-white/15'
+                }`}
+              >
+                <UserCheck className="w-3.5 h-3.5" />
+                <span>Individual / Cycle Tester</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setApplicantType('clinical')}
+                className={`flex-1 py-1.5 px-3 rounded-xl text-xs font-semibold flex items-center justify-center gap-1.5 transition-all ${
+                  applicantType === 'clinical'
+                    ? 'bg-white text-vyvia-forest shadow'
+                    : 'bg-white/10 text-vyvia-sand hover:bg-white/15'
+                }`}
+              >
+                <Stethoscope className="w-3.5 h-3.5" />
+                <span>Medical / Healthcare Clinic</span>
+              </button>
             </div>
+          )}
+        </div>
 
-            {errorMessage && (
-              <div className="mb-4 p-3 rounded-xl bg-red-50 border border-red-200 text-red-800 text-xs flex items-center gap-2">
-                <AlertCircle className="w-4 h-4 shrink-0" />
-                <span>{errorMessage}</span>
-              </div>
-            )}
+        {/* Modal Scrollable Body */}
+        <div className="p-6 overflow-y-auto space-y-6">
+          {!successData ? (
+            <form onSubmit={handleSubmit} className="space-y-5">
+              {errorMessage && (
+                <div className="p-3 rounded-xl bg-red-50 text-red-800 text-xs border border-red-200 flex items-center gap-2">
+                  <AlertCircle className="w-4 h-4 text-red-600 shrink-0" />
+                  <span>{errorMessage}</span>
+                </div>
+              )}
 
-            {/* Form */}
-            <form onSubmit={handleSubmit} className="space-y-4 text-xs">
-              <div>
-                <label className="block font-semibold text-vyvia-dark mb-1">
-                  Full Name *
-                </label>
-                <input
-                  type="text"
-                  required
-                  value={fullName}
-                  onChange={(e) => setFullName(e.target.value)}
-                  placeholder="e.g. Priya Sharma"
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-vyvia-sand bg-white text-vyvia-dark focus:outline-none focus:border-vyvia-forest focus:ring-1 focus:ring-vyvia-forest text-xs"
-                />
-              </div>
-
-              <div>
-                <label className="block font-semibold text-vyvia-dark mb-1">
-                  Email Address *
-                </label>
-                <input
-                  type="email"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="priya@example.com"
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-vyvia-sand bg-white text-vyvia-dark focus:outline-none focus:border-vyvia-forest focus:ring-1 focus:ring-vyvia-forest text-xs"
-                />
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <div>
-                  <label className="block font-semibold text-vyvia-dark mb-1">
-                    City & Pincode
+              {/* Personal Details */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="space-y-1.5">
+                  <label className="text-xs font-semibold text-vyvia-dark">
+                    {applicantType === 'clinical' ? 'Contact Name / Lead Doctor *' : 'Full Name *'}
                   </label>
                   <input
                     type="text"
-                    value={city}
-                    onChange={(e) => setCity(e.target.value)}
-                    placeholder="e.g. Mumbai, 400001"
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-vyvia-sand bg-white text-vyvia-dark focus:outline-none focus:border-vyvia-forest text-xs"
+                    required
+                    value={fullName}
+                    onChange={(e) => setFullName(e.target.value)}
+                    placeholder="e.g. Dr. Priya Sharma"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-vyvia-sand bg-white text-xs text-vyvia-dark focus:outline-none focus:ring-2 focus:ring-vyvia-leaf/30"
                   />
                 </div>
 
-                <div>
-                  <label className="block font-semibold text-vyvia-dark mb-1">
-                    Target Flow Caliber
+                <div className="space-y-1.5">
+                  <label className="text-xs font-semibold text-vyvia-dark">
+                    Email Address *
                   </label>
-                  <select
-                    value={flowProfile}
-                    onChange={(e) => setFlowProfile(e.target.value as any)}
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-vyvia-sand bg-white text-vyvia-dark focus:outline-none focus:border-vyvia-forest text-xs"
-                  >
-                    <option value="light">Light Flow / Spotting (Buffer 4.2–4.5)</option>
-                    <option value="medium">Medium / Normal Flow (Buffer 4.5–4.8)</option>
-                    <option value="heavy">Heavy Flow Peak (Buffer 4.8–5.0)</option>
-                    <option value="mixed">Mixed Discovery Box (All 3 Flows)</option>
-                  </select>
+                  <input
+                    type="email"
+                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="name@example.com"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-vyvia-sand bg-white text-xs text-vyvia-dark focus:outline-none focus:ring-2 focus:ring-vyvia-leaf/30"
+                  />
                 </div>
               </div>
 
-              {/* Symptom Checkboxes */}
-              <div>
-                <label className="block font-semibold text-vyvia-dark mb-1.5">
-                  Symptoms you currently face with standard pads:
+              <div className="space-y-1.5">
+                <label className="text-xs font-semibold text-vyvia-dark">
+                  Location (City, Country)
+                </label>
+                <div className="relative">
+                  <input
+                    type="text"
+                    value={countryCity}
+                    onChange={(e) => setCountryCity(e.target.value)}
+                    placeholder="e.g. London, UK or Mumbai, India"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-vyvia-sand bg-white text-xs text-vyvia-dark focus:outline-none focus:ring-2 focus:ring-vyvia-leaf/30"
+                  />
+                  <Globe className="w-4 h-4 text-vyvia-sage absolute right-3.5 top-3 pointer-events-none" />
+                </div>
+              </div>
+
+              {/* Formulation Interest */}
+              <div className="space-y-2">
+                <label className="text-xs font-semibold text-vyvia-dark block">
+                  Target Formulation Allocation:
+                </label>
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                  {[
+                    { id: 'light', label: 'Feather™', sub: 'Light / Spotting' },
+                    { id: 'medium', label: 'Balance™', sub: 'Medium / Core' },
+                    { id: 'heavy', label: 'Shield Max™', sub: 'Heavy Flow' },
+                    { id: 'all', label: 'Full Protocol™', sub: 'All 3 Stages' },
+                  ].map((f) => (
+                    <button
+                      key={f.id}
+                      type="button"
+                      onClick={() => setFlowProfile(f.id as any)}
+                      className={`p-3 rounded-xl border text-left transition-all ${
+                        flowProfile === f.id
+                          ? 'border-vyvia-forest bg-emerald-50/80 text-vyvia-forest font-semibold ring-2 ring-vyvia-forest/10'
+                          : 'border-vyvia-sand bg-white text-vyvia-charcoal hover:bg-vyvia-cream'
+                      }`}
+                    >
+                      <div className="text-xs">{f.label}</div>
+                      <div className="text-[10px] text-vyvia-sage">{f.sub}</div>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Skin Vulnerabilities / Research Focus */}
+              <div className="space-y-2">
+                <label className="text-xs font-semibold text-vyvia-dark block">
+                  Intimate Skin Sensitivities or Research Areas:
                 </label>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                   {[
                     'Burning & redness from regular pads',
-                    'Post-period chafing',
-                    'Dampness / soggy skin feeling',
-                    'Stale unpleasant odor',
-                    'Bumps or painful boils'
+                    'Post-period chafing & skin sensitivity',
+                    'Severe stale menstrual odor',
+                    'Recurrent contact dermatitis or itching',
+                    'Clinical evaluation / Institutional review'
                   ].map((sym) => {
-                    const checked = symptoms.includes(sym);
+                    const isChecked = symptoms.includes(sym);
                     return (
-                      <label
+                      <button
                         key={sym}
+                        type="button"
                         onClick={() => toggleSymptom(sym)}
-                        className={`p-2 rounded-lg border cursor-pointer flex items-center gap-2 transition-colors ${
-                          checked
-                            ? 'bg-vyvia-forest/10 border-vyvia-forest text-vyvia-forest font-medium'
-                            : 'bg-white border-vyvia-sand text-vyvia-charcoal/70'
+                        className={`p-2.5 rounded-xl border text-left text-xs flex items-center gap-2 transition-all ${
+                          isChecked
+                            ? 'border-emerald-500 bg-emerald-50/60 text-emerald-950 font-medium'
+                            : 'border-vyvia-sand bg-white text-vyvia-charcoal/80 hover:bg-vyvia-cream/50'
                         }`}
                       >
-                        <input
-                          type="checkbox"
-                          checked={checked}
-                          readOnly
-                          className="accent-vyvia-forest"
-                        />
-                        <span className="text-[11px]">{sym}</span>
-                      </label>
+                        <div
+                          className={`w-4 h-4 rounded-md border flex items-center justify-center shrink-0 ${
+                            isChecked ? 'bg-emerald-600 border-emerald-600 text-white' : 'border-vyvia-sand'
+                          }`}
+                        >
+                          {isChecked && <CheckCircle2 className="w-3 h-3" />}
+                        </div>
+                        <span className="text-[11px] leading-tight">{sym}</span>
+                      </button>
                     );
                   })}
                 </div>
               </div>
 
-              {/* Beta tester checkbox */}
-              <label className="flex items-start gap-2 pt-1 cursor-pointer">
-                <input
-                  type="checkbox"
-                  checked={isTester}
-                  onChange={(e) => setIsTester(e.target.checked)}
-                  className="mt-0.5 accent-vyvia-forest"
+              {/* Optional Notes */}
+              <div className="space-y-1.5">
+                <label className="text-xs font-semibold text-vyvia-dark">
+                  Notes or Questions for Inventors Anshika &amp; Shubham (Optional):
+                </label>
+                <textarea
+                  rows={2}
+                  value={notes}
+                  onChange={(e) => setNotes(e.target.value)}
+                  placeholder="Tell us about your cycle needs or clinic specifications..."
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-vyvia-sand bg-white text-xs text-vyvia-dark focus:outline-none focus:ring-2 focus:ring-vyvia-leaf/30"
                 />
-                <span className="text-vyvia-charcoal/80 text-[11px]">
-                  Yes, enroll me in the VIP Clinical Feedback cohort. I agree to share a 30-second anonymous review after testing.
-                </span>
-              </label>
+              </div>
 
               {/* Submit CTA */}
-              <div className="pt-3">
+              <div className="pt-2">
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full py-3.5 rounded-full bg-vyvia-forest text-vyvia-cream text-sm font-semibold hover:bg-vyvia-leaf transition-all shadow-md flex items-center justify-center gap-2 disabled:opacity-70"
+                  className="w-full py-3.5 rounded-xl bg-vyvia-forest text-vyvia-cream font-semibold text-xs sm:text-sm hover:bg-vyvia-leaf transition-all shadow-md flex items-center justify-center gap-2 disabled:opacity-70"
                 >
                   {loading ? (
                     <>
                       <Loader2 className="w-4 h-4 animate-spin" />
-                      <span>Encrypting & Reserving Edge Allocation...</span>
+                      <span>Reserving Early Allocation...</span>
                     </>
                   ) : (
                     <>
                       <Sparkles className="w-4 h-4 text-vyvia-rose" />
-                      <span>Confirm Free Sample Reservation</span>
+                      <span>Submit VIP Waitlist Application</span>
                     </>
                   )}
                 </button>
               </div>
 
-              <div className="text-[10px] text-center text-vyvia-sage pt-1">
-                Patent protection by Anshika & Shubham • Cloudflare Edge Certified • Zero Spam
+              <div className="text-[10px] text-center text-vyvia-sage pt-1 flex items-center justify-center gap-2">
+                <Shield className="w-3 h-3 text-emerald-600" />
+                <span>Patented Bio-Design by Anshika &amp; Shubham • Zero Commercial Charge Today • Strict Data Privacy</span>
               </div>
             </form>
-          </div>
-        ) : (
-          /* Confirmation Success Screen */
-          <div className="text-center py-6 space-y-5 animate-fadeIn">
-            <div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center mx-auto shadow-inner">
-              <CheckCircle2 className="w-8 h-8 text-emerald-600" />
-            </div>
+          ) : (
+            /* Confirmation Screen */
+            <div className="text-center py-6 space-y-5 animate-fadeIn">
+              <div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center mx-auto shadow-inner">
+                <CheckCircle2 className="w-8 h-8 text-emerald-600" />
+              </div>
 
-            <div className="space-y-1">
-              <h3 className="font-serif text-2xl sm:text-3xl font-bold text-vyvia-dark">
-                Sample Reservation Confirmed!
-              </h3>
-              <p className="text-xs sm:text-sm text-vyvia-charcoal/80">
-                Welcome to the VYVIA Founder Circle, <strong>{successData?.record?.fullName || fullName}</strong>.
+              <div className="space-y-1">
+                <h3 className="font-serif text-2xl sm:text-3xl font-bold text-vyvia-dark">
+                  Early Access Allocation Reserved!
+                </h3>
+                <p className="text-xs sm:text-sm text-vyvia-charcoal/80">
+                  Welcome to the VYVIA Pre-Launch Circle, <strong>{successData?.record?.fullName || fullName}</strong>.
+                </p>
+              </div>
+
+              <div className="p-5 rounded-2xl bg-vyvia-cream border border-vyvia-sand text-left space-y-2.5 text-xs">
+                <div className="flex justify-between border-b border-vyvia-sand pb-2">
+                  <span className="text-vyvia-sage">VIP Waitlist Token:</span>
+                  <span className="font-mono font-bold text-vyvia-forest text-sm">{successData.submissionId}</span>
+                </div>
+                <div className="flex justify-between border-b border-vyvia-sand pb-2">
+                  <span className="text-vyvia-sage">Allocated Prototype:</span>
+                  <span className="font-medium text-vyvia-dark">{successData?.record?.assignedSample}</span>
+                </div>
+                <div className="flex justify-between border-b border-vyvia-sand pb-2">
+                  <span className="text-vyvia-sage">Research Reference:</span>
+                  <span className="font-medium text-vyvia-dark">Patent File By Anshika &amp; Shubham</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-vyvia-sage">Status:</span>
+                  <span className="font-bold text-emerald-800">Priority Tier 1 Queue</span>
+                </div>
+              </div>
+
+              <p className="text-xs text-vyvia-charcoal/70 leading-relaxed max-w-md mx-auto">
+                We have registered your details for our first production batch. You will receive private alpha laboratory progress updates and early dispatch scheduling as we finalize our clinical pilot cohorts.
               </p>
+
+              <button
+                onClick={handleResetAndClose}
+                className="px-6 py-2.5 rounded-full bg-vyvia-forest text-white text-xs font-semibold hover:bg-vyvia-leaf transition-colors shadow"
+              >
+                Close &amp; Return to Innovation Briefing
+              </button>
             </div>
-
-            <div className="p-4 rounded-xl bg-vyvia-cream border border-vyvia-sand text-left space-y-2 text-xs">
-              <div className="flex justify-between border-b border-vyvia-sand pb-1.5">
-                <span className="text-vyvia-sage">Reservation Token:</span>
-                <span className="font-mono font-bold text-vyvia-forest">{successData.submissionId}</span>
-              </div>
-              <div className="flex justify-between border-b border-vyvia-sand pb-1.5">
-                <span className="text-vyvia-sage">Allocated Kit:</span>
-                <span className="font-medium text-vyvia-dark">{successData?.record?.assignedSample}</span>
-              </div>
-              <div className="flex justify-between border-b border-vyvia-sand pb-1.5">
-                <span className="text-vyvia-sage">Patent Reference:</span>
-                <span className="font-medium text-vyvia-dark">Patent File By Anshika & Shubham</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-vyvia-sage">Dispatch Status:</span>
-                <span className="text-emerald-700 font-semibold">Priority Batch #1 (Free Shipping)</span>
-              </div>
-            </div>
-
-            <p className="text-xs text-vyvia-charcoal/70">
-              We have queued your dispatch details. You will receive tracking and a digital pH guide at <strong>{email}</strong>.
-            </p>
-
-            <button
-              onClick={onClose}
-              className="w-full py-3 rounded-full bg-vyvia-forest text-white text-xs font-semibold hover:bg-vyvia-leaf transition-colors"
-            >
-              Back to Experience
-            </button>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </div>
   );

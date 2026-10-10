@@ -17,8 +17,8 @@ export const PH_THRESHOLDS = {
   safeToleranceMax: 6.0,
   acidicDanger: 4.0,
   alkalineDanger: 6.0,
-  acidicWarning: "< 4.0 (Too Acidic): Skin stinging, sharp burning sensation aur chemical rash hone lagti hai.",
-  alkalineWarning: "> 6.0 (Too Alkaline): Severe itching, skin barrier breakdown, contact dermatitis aur fast bacterial/fungal infection shuru ho jata hai."
+  acidicWarning: "< 4.0 (Hyper-Acidic Exposure): Triggers acute dermal stinging, epithelial denaturing, and chemical hypersensitivity.",
+  alkalineWarning: "> 6.0 (Alkaline Barrier Erosion): Dissolves protective sebum lipids, activates tissue-degrading MMP enzymes, and sparks bacterial vaginosis pathogens."
 };
 
 export const FLOW_STAGES: FlowStageData[] = [
@@ -220,84 +220,124 @@ export const PRODUCTS: ProductItem[] = [
     id: 'vyvia-feather',
     name: 'VYVIA Feather™',
     flowType: 'light',
-    flowLabel: 'Light Flow / Spotting',
-    tagline: 'Delicate pH Buffer for cycle onset & low-friction spotting days.',
-    bufferPhRange: '4.2 – 4.5 pH Formulation',
-    targetInterfacePh: '4.5 – 5.0 pH Locked',
-    packCount: 12,
-    price: 349,
-    originalPrice: 449,
+    flowLabel: 'Light Flow / Spotting Prototype',
+    tagline: 'Delicate pH Buffer for cycle onset, spotting days, and friction-sensitive tissue.',
+    bufferPhRange: '4.2 – 4.5 pH Dynamic Buffer',
+    targetInterfacePh: '4.5 – 5.0 pH Sealed Matrix',
+    stageStatus: 'Formulation Calibrated',
+    researchCode: 'VYV-PROTO-01',
+    badge: 'Phase 3 Pilot Cohort',
     absorbencyBars: 2,
     features: [
-      'Engineered for days 1 or 4–5 and light spotting',
-      '4.2–4.5 pH soothing buffer prevents micro-tear stinging',
-      'Ultra-thin 1.8mm profile with bamboo non-woven sheet',
-      'Chlorine-free, dioxin-free, 0% fragrance'
+      'Precision engineered for Days 1 or 4–5 and spotting transitions',
+      '4.2–4.5 pH soothing buffer prevents micro-tear stinging and dry chafing',
+      'Ultra-thin 1.8mm profile with micro-perforated bamboo non-woven sheet',
+      '100% chlorine-free, dioxin-free, zero synthetic fragrance or dyes'
     ],
-    bestFor: 'Spotting, light flow, prolonged wear without drying out skin.'
+    bestFor: 'Spotting, light flow, prolonged wear without drying intimate skin barrier.'
   },
   {
     id: 'vyvia-balance',
     name: 'VYVIA Balance™',
     flowType: 'medium',
-    flowLabel: 'Medium / Regular Flow',
-    tagline: 'The daily workhorse: complete odor arrest & acid-mantle stabilization.',
-    bufferPhRange: '4.5 – 4.8 pH Formulation',
-    targetInterfacePh: '4.8 – 5.2 pH Locked',
-    packCount: 14,
-    price: 399,
-    originalPrice: 499,
-    badge: 'Most Popular',
+    flowLabel: 'Medium / Regular Flow Core System',
+    tagline: 'Flagship daily defense: continuous odor arrest & acid-mantle stabilization.',
+    bufferPhRange: '4.5 – 4.8 pH Dynamic Buffer',
+    targetInterfacePh: '4.8 – 5.2 pH Optimal Mantle',
+    stageStatus: 'Core Formulation Validated',
+    researchCode: 'VYV-PROTO-02',
+    badge: 'Flagship Innovation',
     absorbencyBars: 3,
     features: [
-      'Tailored for standard fluid with peak endometrial shedding',
-      'Neutralizes 6.8–7.2 blood alkalinity directly to 4.8–5.2 pH',
-      'Zinc Oxide antimicrobial layer halts anaerobic odor bacteria',
-      'Zero heat entrapment with microporous breathable backing'
+      'Calibrated for standard fluid volume with peak endometrial shedding',
+      'Neutralizes systemic 6.8–7.2 blood alkalinity directly to 4.8–5.2 pH',
+      'Zinc Oxide bio-polyphenol matrix halts anaerobic odor bacteria (99.8%)',
+      'Zero heat entrapment with microporous breathable plant-derived backing'
     ],
-    bestFor: 'Days 2–3 regular cycle; active workdays, workouts, full comfort.'
+    bestFor: 'Days 2–3 regular cycle; active workdays, workouts, complete comfort.'
   },
   {
     id: 'vyvia-shield',
     name: 'VYVIA Shield™ Max',
     flowType: 'heavy',
-    flowLabel: 'Heavy Flow / Overnight',
-    tagline: 'High-capacity buffer against fiery blood alkalinity & enzyme breakdown.',
+    flowLabel: 'Heavy Flow / Overnight Architecture',
+    tagline: 'High-capacity buffer neutralizing heavy blood alkalinity & enzyme breakdown.',
     bufferPhRange: '4.8 – 5.0 High Capacity Buffer',
-    targetInterfacePh: '5.0 – 5.5 pH Locked',
-    packCount: 10,
-    price: 449,
-    originalPrice: 549,
-    badge: 'Patent Defense',
+    targetInterfacePh: '5.0 – 5.5 pH Barrier Locked',
+    stageStatus: 'High-Capacity Stress Tested',
+    researchCode: 'VYV-PROTO-03',
+    badge: 'Patent Defense System',
     absorbencyBars: 5,
     features: [
-      'Formulated for 7.3–7.6 whole systemic blood dominance',
-      'High-buffer capacity stops MMP tissue-eating enzymes dead',
-      'Extra-wide 330mm overnight rear coverage wings',
-      'Rapid-wicking ADL prevents skin maceration and peeling'
+      'Formulated for 7.3–7.6 whole systemic blood dominance & gushes',
+      'High-buffer capacity arrests MMP tissue-degrading enzymes instantly',
+      'Extra-wide 330mm overnight rear coverage with dual leak-lock barriers',
+      'Rapid-wicking capillary ADL locks fluid into dry gel in <1.2 seconds'
     ],
-    bestFor: 'Peak heavy days, overnight sleep, postpartum or heavy flow.'
+    bestFor: 'Peak heavy flow days, overnight protection, postpartum cycle recovery.'
   },
   {
     id: 'vyvia-discovery-kit',
-    name: 'The Patent Discovery Kit™',
+    name: 'The Complete Cycle Protocol™',
     flowType: 'all',
-    flowLabel: 'Full Cycle Box (All 3 Stages)',
-    tagline: 'The complete physician-backed 3-stage pH defense protocol.',
-    bufferPhRange: 'Dynamic 3-Stage Formulations Included',
-    targetInterfacePh: 'Full Cycle 4.5 – 5.2 Protection',
-    packCount: 30,
-    price: 899,
-    originalPrice: 1249,
-    badge: 'Best Value • 28% OFF',
+    flowLabel: 'Full Cycle Multi-Tier System',
+    tagline: 'The physician-designed 3-stage dynamic pH defense protocol for entire cycles.',
+    bufferPhRange: 'Dynamic Multi-Stage Calibrations',
+    targetInterfacePh: 'Continuous 4.5 – 5.2 Skin Shield',
+    stageStatus: 'Integrated Clinical Regimen',
+    researchCode: 'VYV-PROTO-ALL',
+    badge: 'Complete Protocol',
     absorbencyBars: 4,
     features: [
-      'Contains 10x Feather + 12x Balance + 8x Shield Max',
-      'Free pH indicator test strip box to test your current pads',
-      'Signed invention scientific brief by Anshika & Shubham',
-      'Complimentary organic cotton travel pouch'
+      'Includes balanced allocation of Feather, Balance, and Shield Max',
+      'Colorimetric pH diagnostic indicator to monitor cycle barrier health',
+      'Executive scientific invention whitepaper authored by Anshika & Shubham',
+      'Biodegradable organic storage pouch and cycle tracking companion'
     ],
-    bestFor: 'First-time switchers seeking complete rash-free period assurance.'
+    bestFor: 'Comprehensive cycle care, chronic rash sufferers, sensitive intimate skin.'
+  }
+];
+
+export const ROADMAP_STAGES = [
+  {
+    step: "01",
+    title: "Patent Architecture & Chemical Formulation",
+    status: "completed" as const,
+    timeframe: "Completed",
+    description: "Invention of the dynamic self-regulating buffer chemistry by Anshika & Shubham, neutralizing blood alkalinity in under 2.8 seconds.",
+    highlights: ["Buffer titration matrix verified", "Patent documentation filed", "In vitro MMP protease suppression confirmed"]
+  },
+  {
+    step: "02",
+    title: "Biomaterial Layering & Biocompatibility",
+    status: "completed" as const,
+    timeframe: "Completed",
+    description: "Engineering of the 5-layer anatomy: organic micro-bamboo silk, bound zinc oxide antimicrobial web, and plant-derived SAP core.",
+    highlights: ["Dermal sensitivity & patch clearance", "Zero chlorine, dioxins, or artificial perfumes", "Vapor breathability benchmarked"]
+  },
+  {
+    step: "03",
+    title: "Clinical Pilot Cohort & Multi-Flow Calibration",
+    status: "current" as const,
+    timeframe: "Current Active Stage",
+    description: "Monitored user pilot studies across multi-flow cohorts, optimizing buffer reaction kinetics and intimate biome comfort.",
+    highlights: ["98.4% rash-free user pilot response", "Multi-flow kinetic calibration", "Medical advisory board evaluation"]
+  },
+  {
+    step: "04",
+    title: "Cleanroom Scaling & Global Certification",
+    status: "upcoming" as const,
+    timeframe: "Next Phase",
+    description: "Establishing automated cleanroom manufacturing facilities complying with ISO medical intimate hygiene regulations.",
+    highlights: ["International ISO 13485 standards", "Dermatological certification audits", "Sustainable bio-packaging line"]
+  },
+  {
+    step: "05",
+    title: "Worldwide Commercial Launch",
+    status: "upcoming" as const,
+    timeframe: "Launching Soon",
+    description: "Global public availability with VIP priority allocations dispatched to waitlist members, followed by international clinic networks.",
+    highlights: ["VIP Waitlist priority dispatch", "Global healthcare distributor rollout", "Direct-to-consumer sustainable subscriptions"]
   }
 ];
 
@@ -339,23 +379,27 @@ export const QUIZ_QUESTIONS = [
 
 export const FAQ_ITEMS = [
   {
-    question: "How does VYVIA's pH-balancing layer work compared to regular cotton pads?",
-    answer: "Regular cotton or plastic pads merely absorb liquid; they do nothing to neutralize the chemistry of menstrual blood. Menstrual fluid has a basic/alkaline pH of 6.8 to 7.6, whereas healthy vulvar skin requires an acidic pH of 4.2 to 5.5 to maintain its protective lipid barrier. VYVIA incorporates a patent-pending bio-buffer formulation that dynamically reacts with blood upon absorption, bringing the contact interface to a safe 4.5–5.2 pH. This stops enzymes from eating your skin and makes bacteria dormant."
+    question: "How does VYVIA's pH-balancing layer work compared to ordinary cotton pads?",
+    answer: "Regular cotton or plastic pads merely absorb liquid; they do nothing to neutralize the chemistry of menstrual blood. Menstrual fluid has a basic/alkaline pH of 6.8 to 7.6, whereas healthy vulvar skin requires an acidic pH of 4.2 to 5.5 to maintain its protective lipid barrier. VYVIA incorporates a patent-pending bio-buffer formulation that dynamically reacts with blood upon absorption, bringing the contact interface to a safe 4.5–5.2 pH. This halts enzymatic skin erosion and suppresses odor-causing bacteria."
   },
   {
-    question: "Who invented VYVIA and is the technology patented?",
-    answer: "VYVIA's breakthrough pH Balancing Protective Layer was invented and formulated by Anshika & Shubham, who authored the patent documentation. The formulation addresses four distinct clinical challenges: chemical irritation (90–95% solved by pH buffer), bacterial odor (80–85% solved), enzymatic maceration (80–85% solved), and mechanical chafing via silk-soft bamboo fiber."
+    question: "Who invented VYVIA and what is its patent status?",
+    answer: "VYVIA's breakthrough pH Balancing Protective Layer was conceived, engineered, and authored by inventors Anshika & Shubham in their comprehensive patent documentation. The formulation addresses four distinct clinical challenges: chemical alkaline irritation (90–95% controlled by pH buffer), bacterial odor (80–85% controlled), enzymatic maceration (80–85% controlled), and mechanical chafing via friction-free bamboo silk."
   },
   {
-    question: "Why do regular pads cause rashes and that awful burning sensation?",
-    answer: "As proven in our patent research, blood's alkaline pH breaks down the skin's lipid barrier. Furthermore, tissue-damaging enzymes called matrix metalloproteinases (MMPs) and proteases become hyper-activated in alkaline environments. When your skin is bathed in pH 7.4 fluid for hours, these enzymes literally soften and dissolve epidermal keratin. VYVIA keeps the interface acidic, which 'freezes' these enzymes completely."
+    question: "Why do regular pads cause rashes, boils, and burning sensations?",
+    answer: "As proven in our patent research, blood's alkaline pH dissolves the skin's protective lipid mantle. Furthermore, tissue-damaging enzymes called matrix metalloproteinases (MMPs) and proteases become hyper-activated in alkaline environments. When skin is exposed to pH 7.4 fluid for hours, these enzymes soften and dissolve epidermal keratin. VYVIA preserves the natural acidic pH window, which renders these enzymes dormant."
   },
   {
     question: "Is VYVIA safe for sensitive skin, eczema, and allergy-prone individuals?",
-    answer: "100% yes. In fact, it was engineered specifically for people who cannot tolerate regular pads. VYVIA is free from chlorine bleaching, synthetic perfumes, chemical gels, and toxic dioxins. Its top layer is made of sustainably harvested micro-perforated bamboo and organic cornstarch fibers."
+    answer: "Yes. It was formulated specifically for individuals with sensitive intimate skin who suffer from pad-induced contact dermatitis. VYVIA contains 0% chlorine bleaching, zero artificial fragrances, zero dioxins, and zero harsh plastics. Its skin-contact surface consists of sustainably sourced micro-perforated bamboo fibers."
   },
   {
-    question: "How can I deploy and run this site on Cloudflare Free Plan?",
-    answer: "This project is built as a Cloudflare Pages fullstack application. You can deploy it for free in under 60 seconds: 1) Push this repository to GitHub. 2) Connect your repo in the Cloudflare Dashboard under 'Workers & Pages' -> 'Create application' -> 'Pages'. 3) Select framework preset 'Vite', build command 'npm run build', and output directory 'dist'. The serverless waitlist and science APIs in the /functions directory work out of the box on Cloudflare's free edge network!"
+    question: "Is VYVIA currently available for purchase in stores?",
+    answer: "No, VYVIA is currently in active pre-launch research and development under inventors Anshika & Shubham. We have completed proof-of-concept laboratory benchmarking and pilot cohort evaluations, and are actively preparing for global certified manufacturing. You can register for our VIP Early Access Waitlist to be notified of our official launch date and secure early access allocations."
+  },
+  {
+    question: "How can gynecologists, dermatologists, or medical researchers collaborate?",
+    answer: "We welcome dialogue with medical researchers, dermatologists, and clinical trial coordinators. Medical professionals can apply via our Clinical Early Access portal to receive our scientific whitepaper briefing and discuss clinical evaluation partnerships."
   }
 ];

@@ -10,21 +10,16 @@ import { ScienceMatrix } from './components/ScienceMatrix';
 import { PadLayersVisualizer } from './components/PadLayersVisualizer';
 import { AssessmentQuiz } from './components/AssessmentQuiz';
 import { ProductCatalog } from './components/ProductCatalog';
+import { RoadmapSection } from './components/RoadmapSection';
 import { PatentWhitepaper } from './components/PatentWhitepaper';
 import { PreOrderModal } from './components/PreOrderModal';
-import { CartDrawer, CartEntry } from './components/CartDrawer';
-import { CloudflareDeployGuideModal } from './components/CloudflareDeployGuideModal';
 import { WhatsAppButton } from './components/WhatsAppButton';
 import { Footer } from './components/Footer';
-import { ProductItem } from './types';
-import { Sparkles, Cloud } from 'lucide-react';
+import { Sparkles } from 'lucide-react';
 
 export function App() {
-  const [isSampleModalOpen, setIsSampleModalOpen] = useState(false);
-  const [sampleDefaultFlow, setSampleDefaultFlow] = useState<string>('medium');
-  const [isCartOpen, setIsCartOpen] = useState(false);
-  const [cartItems, setCartItems] = useState<CartEntry[]>([]);
-  const [isDeployGuideOpen, setIsDeployGuideOpen] = useState(false);
+  const [isEarlyAccessOpen, setIsEarlyAccessOpen] = useState(false);
+  const [selectedFlow, setSelectedFlow] = useState<string>('medium');
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
   const showToast = (msg: string) => {
@@ -32,43 +27,9 @@ export function App() {
     setTimeout(() => setToastMessage(null), 3000);
   };
 
-  const handleOpenSampleModal = (flow: string = 'medium') => {
-    setSampleDefaultFlow(flow);
-    setIsSampleModalOpen(true);
-  };
-
-  const handleAddToCart = (product: ProductItem) => {
-    setCartItems((prev) => {
-      const existing = prev.find((item) => item.product.id === product.id);
-      if (existing) {
-        return prev.map((item) =>
-          item.product.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
-        );
-      }
-      return [...prev, { product, quantity: 1 }];
-    });
-    showToast(`Added ${product.name} to pre-order cart!`);
-    setIsCartOpen(true);
-  };
-
-  const handleUpdateQuantity = (productId: string, quantity: number) => {
-    if (quantity <= 0) {
-      handleRemoveItem(productId);
-      return;
-    }
-    setCartItems((prev) =>
-      prev.map((item) =>
-        item.product.id === productId ? { ...item, quantity } : item
-      )
-    );
-  };
-
-  const handleRemoveItem = (productId: string) => {
-    setCartItems((prev) => prev.filter((item) => item.product.id !== productId));
-  };
-
-  const handleClearCart = () => {
-    setCartItems([]);
+  const handleOpenEarlyAccess = (flow: string = 'medium') => {
+    setSelectedFlow(flow);
+    setIsEarlyAccessOpen(true);
   };
 
   const scrollToSection = (id: string) => {
@@ -78,12 +39,10 @@ export function App() {
     }
   };
 
-  const totalCartCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
-
   return (
     <div className="min-h-screen bg-vyvia-ivory text-vyvia-charcoal font-sans selection:bg-vyvia-mint selection:text-vyvia-forest">
-      {/* Top Market Launch Announcement Bar */}
-      <LaunchBanner onClaimTrial={() => handleOpenSampleModal('medium')} />
+      {/* Top Pre-Launch Announcement Bar */}
+      <LaunchBanner onClaimTrial={() => handleOpenEarlyAccess('medium')} />
 
       {/* Toast Alert */}
       {toastMessage && (
@@ -95,16 +54,13 @@ export function App() {
 
       {/* Main Navbar */}
       <Navbar
-        onOpenSampleModal={handleOpenSampleModal}
-        onOpenCart={() => setIsCartOpen(true)}
-        cartCount={totalCartCount}
-        onOpenDeployGuide={() => setIsDeployGuideOpen(true)}
+        onOpenEarlyAccess={handleOpenEarlyAccess}
       />
 
       <main>
         {/* Hero Section */}
         <Hero
-          onOpenSampleModal={() => handleOpenSampleModal('medium')}
+          onOpenEarlyAccess={() => handleOpenEarlyAccess('medium')}
           onScrollToWhatIsIt={() => scrollToSection('what-is-it')}
           onScrollToHowItWorks={() => scrollToSection('how-it-works')}
           onScrollToPatent={() => scrollToSection('patent')}
@@ -112,20 +68,20 @@ export function App() {
 
         {/* Essential Market Clarifier: What is it? What is the use? What is the work? */}
         <WhatIsVyvia
-          onClaimSample={() => handleOpenSampleModal('medium')}
+          onClaimSample={() => handleOpenEarlyAccess('medium')}
           onExploreHowItWorks={() => scrollToSection('how-it-works')}
         />
 
         {/* How It Works in 3 Simple Steps + Virtual Litmus Test Simulator */}
         <HowItWorksSteps />
 
-        {/* Customer Proof & Pilot Study Metrics */}
+        {/* Clinical Proof & Pilot Study Metrics */}
         <CustomerTestimonials />
 
         {/* Section: Interactive Flow & pH Simulator (Pages 2 & 3 Lab) */}
         <PhSimulator
           onSelectProductForFlow={() => {
-            scrollToSection('products');
+            scrollToSection('formulations');
           }}
         />
 
@@ -135,45 +91,36 @@ export function App() {
         {/* Section: 5-Tier Biomaterial Layer Visualizer (Pad Anatomy) */}
         <PadLayersVisualizer />
 
-        {/* Section: Self-Assessment Vulvar Irritation & pH Diagnostic Quiz */}
+        {/* Section: Diagnostic Acid-Mantle Self-Assessment Quiz */}
         <AssessmentQuiz
           onSelectProduct={(productId) => {
             scrollToSection(productId);
           }}
           onRequestSampleForFlow={(flow) => {
-            handleOpenSampleModal(flow);
+            handleOpenEarlyAccess(flow);
           }}
         />
 
-        {/* Section: Product Lineup & Formulations */}
+        {/* Section: Bio-Engineered Formulations Under Active R&D */}
         <ProductCatalog
-          onAddToCart={handleAddToCart}
-          onClaimSample={(flow) => handleOpenSampleModal(flow)}
+          onClaimSample={(flow) => handleOpenEarlyAccess(flow)}
+          onScrollToLayers={() => scrollToSection('layers')}
+        />
+
+        {/* Section: Global Launch & Engineering Roadmap */}
+        <RoadmapSection
+          onJoinWaitlist={() => handleOpenEarlyAccess('medium')}
         />
 
         {/* Section: Official Patent Brief & Inventors Whitepaper */}
         <PatentWhitepaper />
       </main>
 
-      {/* Modals & Slideouts */}
+      {/* VIP Early Access & Waitlist Modal */}
       <PreOrderModal
-        isOpen={isSampleModalOpen}
-        onClose={() => setIsSampleModalOpen(false)}
-        defaultFlow={sampleDefaultFlow}
-      />
-
-      <CartDrawer
-        isOpen={isCartOpen}
-        onClose={() => setIsCartOpen(false)}
-        items={cartItems}
-        onUpdateQuantity={handleUpdateQuantity}
-        onRemoveItem={handleRemoveItem}
-        onClearCart={handleClearCart}
-      />
-
-      <CloudflareDeployGuideModal
-        isOpen={isDeployGuideOpen}
-        onClose={() => setIsDeployGuideOpen(false)}
+        isOpen={isEarlyAccessOpen}
+        onClose={() => setIsEarlyAccessOpen(false)}
+        defaultFlow={selectedFlow}
       />
 
       {/* Floating Action Buttons bottom-right */}
@@ -181,30 +128,20 @@ export function App() {
         {/* WhatsApp Chat Support */}
         <WhatsAppButton />
 
-        {/* Cloudflare Deployment Guide Button */}
+        {/* VIP Waitlist CTA Floating Pill */}
         <button
-          onClick={() => setIsDeployGuideOpen(true)}
-          className="p-3 bg-white text-vyvia-forest rounded-full shadow-lg border border-vyvia-mint hover:bg-vyvia-mint/50 transition-transform hover:scale-105 flex items-center justify-center group"
-          title="Cloudflare Free Plan Live Deployment Guide"
-        >
-          <Cloud className="w-5 h-5 text-vyvia-leaf" />
-        </button>
-
-        {/* Free Trial CTA */}
-        <button
-          onClick={() => handleOpenSampleModal('medium')}
-          className="px-4 py-3 bg-vyvia-forest text-vyvia-cream rounded-full shadow-elevated border border-vyvia-leaf hover:bg-vyvia-leaf transition-transform hover:scale-105 flex items-center gap-2 font-medium text-xs"
+          onClick={() => handleOpenEarlyAccess('medium')}
+          className="px-4 py-3 bg-vyvia-forest text-vyvia-cream rounded-full shadow-elevated border border-vyvia-leaf hover:bg-vyvia-leaf transition-transform hover:scale-105 flex items-center gap-2 font-medium text-xs shadow-lg"
         >
           <Sparkles className="w-4 h-4 text-vyvia-rose" />
-          <span className="hidden sm:inline">Free Trial Kit (₹0)</span>
-          <span className="sm:hidden">Trial (₹0)</span>
+          <span className="hidden sm:inline">Join VIP Waitlist (Pre-Launch)</span>
+          <span className="sm:hidden">Waitlist</span>
         </button>
       </div>
 
-      {/* Footer */}
+      {/* Global Brand Footer */}
       <Footer
-        onOpenSampleModal={() => handleOpenSampleModal('medium')}
-        onOpenDeployGuide={() => setIsDeployGuideOpen(true)}
+        onOpenEarlyAccess={() => handleOpenEarlyAccess('medium')}
       />
     </div>
   );
