@@ -67,38 +67,28 @@ export const Footer: React.FC<FooterProps> = ({
             </span>
             <ul className="space-y-2 text-vyvia-sand/70">
               <li>
-                <a href="#what-is-it" className="hover:text-vyvia-cream transition-colors">
-                  What is VYVIA?
+                <a href="#breakthrough" className="hover:text-vyvia-cream transition-colors">
+                  The Breakthrough Science
                 </a>
               </li>
               <li>
-                <a href="#how-it-works" className="hover:text-vyvia-cream transition-colors">
-                  The Biological Mechanism
+                <a href="#studio" className="hover:text-vyvia-cream transition-colors">
+                  The Innovation Studio (5 Tabs)
                 </a>
               </li>
               <li>
-                <a href="#simulator" className="hover:text-vyvia-cream transition-colors">
-                  pH Lab Optimization Engine
-                </a>
-              </li>
-              <li>
-                <a href="#layers" className="hover:text-vyvia-cream transition-colors">
-                  5-Layer Biomaterial Cross-Section
-                </a>
-              </li>
-              <li>
-                <a href="#formulations" className="hover:text-vyvia-cream transition-colors">
-                  Formulations Under Development
-                </a>
-              </li>
-              <li>
-                <a href="#roadmap" className="hover:text-vyvia-cream transition-colors">
-                  Global Launch Roadmap
+                <a href="#results" className="hover:text-vyvia-cream transition-colors">
+                  Clinical Pilot Cohort Results
                 </a>
               </li>
               <li>
                 <a href="#patent" className="hover:text-vyvia-cream transition-colors">
-                  Inventors' Patent Briefing
+                  Official Patent Brief &amp; Whitepaper
+                </a>
+              </li>
+              <li>
+                <a href="#patent" className="hover:text-vyvia-cream transition-colors">
+                  Inventors: Anshika &amp; Shubham
                 </a>
               </li>
             </ul>

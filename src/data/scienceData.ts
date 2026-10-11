@@ -175,42 +175,42 @@ export const PROBLEM_PILLARS: ProblemCategory[] = [
 export const PAD_LAYERS = [
   {
     layerNumber: 1,
-    name: 'Skin Contact Top-Sheet',
-    material: 'Micro-Perforated Organic Bamboo & Cornstarch Non-Woven Silk',
-    function: 'Zero-friction gliding surface; stops mechanical chafing, instant liquid pass-through without moisture re-wet.',
-    highlight: 'Physical Friction Shield',
+    name: 'Silk-Touch Organic Bamboo Top-Sheet',
+    material: '100% Micro-Perforated Organic Bamboo Silk',
+    function: 'Super-soft, friction-free surface that pulls moisture in instantly while keeping your skin completely dry and chafing-free.',
+    highlight: 'Zero-Friction Bamboo',
     color: 'from-amber-100 to-amber-50'
   },
   {
     layerNumber: 2,
-    name: 'Patented pH-Buffering Chemical Coat',
-    material: 'Dynamic Food-Grade Organic Acid-Salt Buffer Complex (Patent by Anshika & Shubham)',
-    function: 'Actively neutralizes alkaline blood (pH 7.4) upon contact down to physiological 4.5–5.0. Freezes MMP enzymes.',
+    name: 'Active pH-Balancing Shield',
+    material: 'Patent Bio-Buffer Formulation by Anshika & Shubham',
+    function: 'Instantly balances blood alkalinity from pH 7.4 down to skin-friendly pH 4.8. Keeps your natural skin barrier safe and stops rashes.',
     highlight: 'Core Patent Innovation',
     color: 'from-emerald-200 to-teal-100'
   },
   {
     layerNumber: 3,
-    name: 'Bio-Antimicrobial Polyphenol Web',
-    material: 'Bound Zinc Oxide & Botanical Polyphenols',
-    function: 'Inhibits 99.8% odor-producing anaerobic bacteria and Candida albicans without disrupting natural vaginal flora.',
+    name: 'Natural Odor & Germ Defense',
+    material: 'Micro-Zinc Oxide & Botanical Extracts',
+    function: 'Stops 99.8% of odor-causing bacteria naturally without harsh synthetic perfumes or chemical masking scents.',
     highlight: 'Odor & Pathogen Defense',
     color: 'from-blue-100 to-indigo-50'
   },
   {
     layerNumber: 4,
-    name: 'Rapid Capillary ADL + SAP Matrix',
-    material: 'Cross-Linked Superabsorbent Polymer with Micro-Groove Fluid Channels',
-    function: 'Instantaneous capillary draw (<1.2s). Locks 35x its weight into dry gel, preventing enzymatic maceration.',
-    highlight: 'Maceration-Proof Core',
+    name: 'Fast-Draw Quick-Dry Core',
+    material: 'Plant-Based Superabsorbent Gel Matrix',
+    function: 'Pulls liquid deep inside in under 1.2 seconds and locks 35x its weight into dry gel, so moisture never touches skin again.',
+    highlight: 'Instant Dry Lock',
     color: 'from-cyan-100 to-sky-50'
   },
   {
     layerNumber: 5,
-    name: 'Breathable Eco-Leak Barrier',
-    material: 'Microporous Biodegradable Film with Natural Hypoallergenic Adhesive',
-    function: 'Allows heat and humidity vapor release while providing 100% leak-proof fluid retention against undergarments.',
-    highlight: 'Thermal Comfort & Seal',
+    name: 'Breathable Eco Leak Shield',
+    material: 'Biodegradable Breathable Film with Gentle Adhesive',
+    function: 'Lets warm vapor and air escape for fresh all-day airflow while ensuring 100% leak-proof security on clothing.',
+    highlight: 'Breathable Leak-Proof',
     color: 'from-stone-100 to-zinc-50'
   }
 ];

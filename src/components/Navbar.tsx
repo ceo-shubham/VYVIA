@@ -1,24 +1,31 @@
 import React, { useState } from 'react';
-import { Sparkles, Menu, X, FlaskConical, ArrowRight } from 'lucide-react';
+import { Sparkles, Menu, X, ArrowRight, Layers } from 'lucide-react';
 
 interface NavbarProps {
   onOpenEarlyAccess: (defaultFlow?: string) => void;
+  onSelectStudioTab?: (tab: string) => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
   onOpenEarlyAccess,
+  onSelectStudioTab,
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navLinks = [
-    { label: 'The Innovation', href: '#what-is-it' },
-    { label: 'The Science', href: '#how-it-works' },
-    { label: 'pH Lab Simulator', href: '#simulator' },
-    { label: 'Pad Anatomy', href: '#layers' },
-    { label: 'Formulations', href: '#formulations' },
-    { label: 'R&D Roadmap', href: '#roadmap' },
-    { label: 'Patent Brief', href: '#patent' },
+    { label: 'The Breakthrough', href: '#breakthrough' },
+    { label: 'Innovation Studio', href: '#studio' },
+    { label: 'Clinical Proof', href: '#results' },
+    { label: 'Patent & Inventors', href: '#patent' },
   ];
+
+  const handleLinkClick = (href: string) => {
+    setMobileMenuOpen(false);
+    const target = document.querySelector(href);
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
     <header className="sticky top-0 z-40 w-full glass-panel border-b border-vyvia-mint/70 transition-all">
@@ -34,7 +41,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 VYVIA
               </span>
               <span className="hidden sm:inline-block px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold uppercase tracking-wider">
-                Pre-Launch
+                Pre-Launch R&amp;D
               </span>
             </div>
             <span className="text-[10px] tracking-widest text-vyvia-sage font-medium uppercase">
@@ -44,25 +51,20 @@ export const Navbar: React.FC<NavbarProps> = ({
         </a>
 
         {/* Desktop Nav */}
-        <nav className="hidden xl:flex items-center gap-6">
+        <nav className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
-            <a
+            <button
               key={link.label}
-              href={link.href}
+              onClick={() => handleLinkClick(link.href)}
               className="text-xs font-semibold text-vyvia-charcoal/80 hover:text-vyvia-forest transition-colors hover:border-b-2 hover:border-vyvia-leaf/70 py-1"
             >
               {link.label}
-            </a>
+            </button>
           ))}
         </nav>
 
         {/* Action CTA */}
         <div className="hidden md:flex items-center gap-3">
-          <div className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-vyvia-mint/60 text-vyvia-forest border border-vyvia-leaf/20">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
-            <span>R&amp;D Phase 3</span>
-          </div>
-
           <button
             onClick={() => onOpenEarlyAccess()}
             className="flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold bg-vyvia-forest text-vyvia-cream hover:bg-vyvia-leaf transition-all shadow-sm hover:shadow group"
@@ -77,7 +79,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         <div className="flex md:hidden items-center gap-2">
           <button
             onClick={() => onOpenEarlyAccess()}
-            className="px-3 py-1.5 rounded-full text-xs font-semibold bg-vyvia-forest text-vyvia-cream"
+            className="px-3.5 py-1.5 rounded-full text-xs font-semibold bg-vyvia-forest text-vyvia-cream"
           >
             Waitlist
           </button>
@@ -93,17 +95,16 @@ export const Navbar: React.FC<NavbarProps> = ({
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="xl:hidden bg-vyvia-ivory border-b border-vyvia-mint px-6 py-5 shadow-lg space-y-4">
+        <div className="md:hidden bg-vyvia-ivory border-b border-vyvia-mint px-6 py-5 shadow-lg space-y-4">
           <div className="flex flex-col space-y-3">
             {navLinks.map((link) => (
-              <a
+              <button
                 key={link.label}
-                href={link.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className="text-base font-medium text-vyvia-charcoal hover:text-vyvia-forest"
+                onClick={() => handleLinkClick(link.href)}
+                className="text-left text-base font-medium text-vyvia-charcoal hover:text-vyvia-forest"
               >
                 {link.label}
-              </a>
+              </button>
             ))}
           </div>
           <div className="pt-3 border-t border-vyvia-sand flex flex-col gap-2.5">

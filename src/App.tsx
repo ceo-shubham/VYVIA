@@ -2,15 +2,9 @@ import React, { useState } from 'react';
 import { LaunchBanner } from './components/LaunchBanner';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
-import { WhatIsVyvia } from './components/WhatIsVyvia';
-import { HowItWorksSteps } from './components/HowItWorksSteps';
+import { TheBreakthrough } from './components/TheBreakthrough';
+import { InnovationStudio, StudioTab } from './components/InnovationStudio';
 import { CustomerTestimonials } from './components/CustomerTestimonials';
-import { PhSimulator } from './components/PhSimulator';
-import { ScienceMatrix } from './components/ScienceMatrix';
-import { PadLayersVisualizer } from './components/PadLayersVisualizer';
-import { AssessmentQuiz } from './components/AssessmentQuiz';
-import { ProductCatalog } from './components/ProductCatalog';
-import { RoadmapSection } from './components/RoadmapSection';
 import { PatentWhitepaper } from './components/PatentWhitepaper';
 import { PreOrderModal } from './components/PreOrderModal';
 import { WhatsAppButton } from './components/WhatsAppButton';
@@ -58,61 +52,28 @@ export function App() {
       />
 
       <main>
-        {/* Hero Section */}
+        {/* 1. Hero Section: Punchy Value, Simple English, 3 Luxury Proof Cards */}
         <Hero
           onOpenEarlyAccess={() => handleOpenEarlyAccess('medium')}
-          onScrollToWhatIsIt={() => scrollToSection('what-is-it')}
-          onScrollToHowItWorks={() => scrollToSection('how-it-works')}
-          onScrollToPatent={() => scrollToSection('patent')}
+          onExploreBreakthrough={() => scrollToSection('breakthrough')}
+          onExploreStudio={() => scrollToSection('studio')}
         />
 
-        {/* Essential Market Clarifier: What is it? What is the use? What is the work? */}
-        <WhatIsVyvia
-          onClaimSample={() => handleOpenEarlyAccess('medium')}
-          onExploreHowItWorks={() => scrollToSection('how-it-works')}
+        {/* 2. The Breakthrough: Replaces bloated text with 3 simple steps + interactive comparison */}
+        <TheBreakthrough
+          onJoinWaitlist={() => handleOpenEarlyAccess('medium')}
+          onExploreStudio={() => scrollToSection('studio')}
         />
 
-        {/* How It Works in 3 Simple Steps + Virtual Litmus Test Simulator */}
-        <HowItWorksSteps />
+        {/* 3. The Innovation Studio: High-Class Hybrid Division (5 Tabs: Lab, Layers, Formulations, Roadmap, Quiz) */}
+        <InnovationStudio
+          onOpenWaitlist={(flow) => handleOpenEarlyAccess(flow || 'medium')}
+        />
 
-        {/* Clinical Proof & Pilot Study Metrics */}
+        {/* 4. Clinical Proof & Pilot Study Metrics */}
         <CustomerTestimonials />
 
-        {/* Section: Interactive Flow & pH Simulator (Pages 2 & 3 Lab) */}
-        <PhSimulator
-          onSelectProductForFlow={() => {
-            scrollToSection('formulations');
-          }}
-        />
-
-        {/* Section: 4-Pillar Problem-Solution Matrix (Page 4 of Patent) */}
-        <ScienceMatrix />
-
-        {/* Section: 5-Tier Biomaterial Layer Visualizer (Pad Anatomy) */}
-        <PadLayersVisualizer />
-
-        {/* Section: Diagnostic Acid-Mantle Self-Assessment Quiz */}
-        <AssessmentQuiz
-          onSelectProduct={(productId) => {
-            scrollToSection(productId);
-          }}
-          onRequestSampleForFlow={(flow) => {
-            handleOpenEarlyAccess(flow);
-          }}
-        />
-
-        {/* Section: Bio-Engineered Formulations Under Active R&D */}
-        <ProductCatalog
-          onClaimSample={(flow) => handleOpenEarlyAccess(flow)}
-          onScrollToLayers={() => scrollToSection('layers')}
-        />
-
-        {/* Section: Global Launch & Engineering Roadmap */}
-        <RoadmapSection
-          onJoinWaitlist={() => handleOpenEarlyAccess('medium')}
-        />
-
-        {/* Section: Official Patent Brief & Inventors Whitepaper */}
+        {/* 5. Official Patent Brief & Inventors Whitepaper */}
         <PatentWhitepaper />
       </main>
 
