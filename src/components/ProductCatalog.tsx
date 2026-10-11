@@ -143,6 +143,58 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
             );
           })}
         </div>
+
+        {/* Unboxing Showcase Banner */}
+        <div className="mt-14 rounded-3xl overflow-hidden border border-vyvia-mint/80 bg-white shadow-elevated">
+          <div className="grid grid-cols-1 lg:grid-cols-12 items-center">
+            <div className="lg:col-span-7 aspect-[16/10] sm:aspect-[16/9] overflow-hidden bg-stone-100">
+              <img
+                src="/images/vyvia_packaging.jpg"
+                alt="VYVIA Bio-Engineered Pads Luxury Sliding Drawer Box"
+                className="w-full h-full object-cover object-center hover:scale-105 transition-transform duration-700"
+              />
+            </div>
+
+            <div className="lg:col-span-5 p-6 sm:p-10 space-y-4">
+              <span className="px-3 py-1 rounded-full bg-vyvia-gold/20 text-amber-900 border border-amber-300 text-[10px] font-bold uppercase tracking-wider">
+                Pre-Launch Prototype Unboxing
+              </span>
+
+              <h3 className="font-serif text-2xl sm:text-3xl font-bold text-vyvia-dark">
+                Sustainable Luxury. Sealed for Pure Hygiene.
+              </h3>
+
+              <p className="text-xs sm:text-sm text-vyvia-charcoal/80 leading-relaxed">
+                Designed with a bespoke sliding drawer system crafted from certified biodegradable fiber with embossed gold detailing. Every pad remains hermetically sealed until use.
+              </p>
+
+              <div className="space-y-2 pt-2 border-t border-vyvia-sand text-xs text-vyvia-charcoal/85">
+                <div className="flex items-center gap-2">
+                  <Check className="w-4 h-4 text-emerald-600 shrink-0" />
+                  <span>Plastic-free, 100% recyclable matte paperboard</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Check className="w-4 h-4 text-emerald-600 shrink-0" />
+                  <span>Includes all 3 calibrated flow prototypes</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Check className="w-4 h-4 text-emerald-600 shrink-0" />
+                  <span>Priority allocation for VIP Waitlist members</span>
+                </div>
+              </div>
+
+              <div className="pt-2">
+                <button
+                  onClick={() => onClaimSample('all')}
+                  className="w-full py-3 rounded-xl bg-vyvia-forest text-vyvia-cream font-semibold text-xs hover:bg-vyvia-leaf transition-all shadow flex items-center justify-center gap-2"
+                >
+                  <Sparkles className="w-3.5 h-3.5 text-vyvia-rose" />
+                  <span>Reserve Unboxing Box Allocation</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );

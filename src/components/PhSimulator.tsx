@@ -33,7 +33,7 @@ export const PhSimulator: React.FC<PhSimulatorProps> = ({ onSelectProductForFlow
         color: 'text-amber-700 bg-amber-100 border-amber-300',
         barColor: 'bg-amber-600',
         message: PH_THRESHOLDS.acidicWarning,
-        cellularEffect: 'Acidic chemical burns, stinging sensation on exposed nerve endings, epidermal denaturing.'
+        cellularEffect: 'Sharp acidic stinging and chemical irritation on delicate intimate skin.'
       };
     }
     if (ph >= 4.2 && ph <= 5.5) {
@@ -42,8 +42,8 @@ export const PhSimulator: React.FC<PhSimulatorProps> = ({ onSelectProductForFlow
         status: 'optimal',
         color: 'text-emerald-900 bg-emerald-100 border-emerald-300',
         barColor: 'bg-emerald-600',
-        message: 'Acid mantle is fully intact; MMP enzymes inactive, skin lipid bilayers sealed.',
-        cellularEffect: 'Healthy stratum corneum, dormant anaerobic bacteria, zero burning or chafing.'
+        message: 'Skin barrier is fully protected, zero burning, and odor bacteria are dormant.',
+        cellularEffect: 'Healthy soft skin, zero burning, natural protective barrier sealed.'
       };
     }
     if ((ph >= 4.0 && ph < 4.2) || (ph > 5.5 && ph <= 6.0)) {
@@ -52,8 +52,8 @@ export const PhSimulator: React.FC<PhSimulatorProps> = ({ onSelectProductForFlow
         status: 'tolerance',
         color: 'text-lime-800 bg-lime-100 border-lime-300',
         barColor: 'bg-lime-500',
-        message: 'Borderline range. Transient tolerance, but prolonged exposure risks microscopic barrier stress.',
-        cellularEffect: 'Mild cellular swelling or sensitivity to secondary friction.'
+        message: 'Borderline range. Transient tolerance, but prolonged exposure causes sensitivity.',
+        cellularEffect: 'Mild skin sensitivity or redness after extended pad wear.'
       };
     }
     return {
@@ -62,7 +62,7 @@ export const PhSimulator: React.FC<PhSimulatorProps> = ({ onSelectProductForFlow
       color: 'text-rose-900 bg-rose-100 border-rose-300',
       barColor: 'bg-rose-600',
       message: PH_THRESHOLDS.alkalineWarning,
-      cellularEffect: 'Severe itching, lipid degradation, activation of matrix metalloproteinases (MMPs), rapid Candida & BV growth.'
+      cellularEffect: 'Skin barrier dissolves, stinging redness, chafing, and rapid growth of odor bacteria.'
     };
   };
 

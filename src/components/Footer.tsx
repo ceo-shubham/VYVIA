@@ -72,6 +72,11 @@ export const Footer: React.FC<FooterProps> = ({
                 </a>
               </li>
               <li>
+                <a href="#motion-reel" className="hover:text-vyvia-cream transition-colors">
+                  4K Motion Graphic Reel
+                </a>
+              </li>
+              <li>
                 <a href="#studio" className="hover:text-vyvia-cream transition-colors">
                   The Innovation Studio (5 Tabs)
                 </a>

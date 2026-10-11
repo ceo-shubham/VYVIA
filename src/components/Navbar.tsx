@@ -14,6 +14,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   const navLinks = [
     { label: 'The Breakthrough', href: '#breakthrough' },
+    { label: '4K Motion Reel', href: '#motion-reel' },
     { label: 'Innovation Studio', href: '#studio' },
     { label: 'Clinical Proof', href: '#results' },
     { label: 'Patent & Inventors', href: '#patent' },

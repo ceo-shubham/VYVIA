@@ -9,6 +9,8 @@ import { PatentWhitepaper } from './components/PatentWhitepaper';
 import { PreOrderModal } from './components/PreOrderModal';
 import { WhatsAppButton } from './components/WhatsAppButton';
 import { Footer } from './components/Footer';
+import { BackgroundMotionGraphic } from './components/BackgroundMotionGraphic';
+import { CinematicMotionPlayer } from './components/CinematicMotionPlayer';
 import { Sparkles } from 'lucide-react';
 
 export function App() {
@@ -34,7 +36,10 @@ export function App() {
   };
 
   return (
-    <div className="min-h-screen bg-vyvia-ivory text-vyvia-charcoal font-sans selection:bg-vyvia-mint selection:text-vyvia-forest">
+    <div className="min-h-screen bg-vyvia-ivory text-vyvia-charcoal font-sans selection:bg-vyvia-mint selection:text-vyvia-forest relative">
+      {/* 60FPS Ambient Fluid Motion Graphic Canvas */}
+      <BackgroundMotionGraphic intensity="subtle" />
+
       {/* Top Pre-Launch Announcement Bar */}
       <LaunchBanner onClaimTrial={() => handleOpenEarlyAccess('medium')} />
 
@@ -51,7 +56,7 @@ export function App() {
         onOpenEarlyAccess={handleOpenEarlyAccess}
       />
 
-      <main>
+      <main className="relative z-10">
         {/* 1. Hero Section: Punchy Value, Simple English, 3 Luxury Proof Cards */}
         <Hero
           onOpenEarlyAccess={() => handleOpenEarlyAccess('medium')}
@@ -65,7 +70,12 @@ export function App() {
           onExploreStudio={() => scrollToSection('studio')}
         />
 
-        {/* 3. The Innovation Studio: High-Class Hybrid Division (5 Tabs: Lab, Layers, Formulations, Roadmap, Quiz) */}
+        {/* 3. 4K Cinematic Product Reel & Motion Graphics Engine */}
+        <CinematicMotionPlayer
+          onJoinWaitlist={() => handleOpenEarlyAccess('medium')}
+        />
+
+        {/* 4. The Innovation Studio: High-Class Hybrid Division (5 Tabs: Lab, Layers, Formulations, Roadmap, Quiz) */}
         <InnovationStudio
           onOpenWaitlist={(flow) => handleOpenEarlyAccess(flow || 'medium')}
         />
