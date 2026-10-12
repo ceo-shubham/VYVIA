@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { X, Sparkles, CheckCircle2, Shield, AlertCircle, Loader2, UserCheck, Stethoscope, Globe } from 'lucide-react';
-import confetti from 'canvas-confetti';
+import { X, CheckCircle2, Shield, AlertCircle, Loader2, UserCheck, Stethoscope, Globe } from 'lucide-react';
 import { FlowStageId } from '../types';
 
 interface PreOrderModalProps {
@@ -89,12 +88,6 @@ export const PreOrderModal: React.FC<PreOrderModalProps> = ({
           }
         });
       }
-
-      confetti({
-        particleCount: 70,
-        spread: 60,
-        origin: { y: 0.6 }
-      });
     } catch {
       // Graceful offline fallback
       const mockSubmissionId = 'VYV-GLOBAL-' + Math.random().toString(36).substring(2, 8).toUpperCase();
@@ -126,7 +119,7 @@ export const PreOrderModal: React.FC<PreOrderModalProps> = ({
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header Bar */}
-        <div className="p-6 pb-4 bg-gradient-to-r from-vyvia-dark via-vyvia-forest to-vyvia-leaf text-vyvia-cream relative">
+        <div className="p-6 pb-4 bg-[#151D18] text-white relative">
           <button
             onClick={handleResetAndClose}
             className="absolute top-5 right-5 p-1.5 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
@@ -136,19 +129,19 @@ export const PreOrderModal: React.FC<PreOrderModalProps> = ({
           </button>
 
           <div className="flex items-center gap-2 mb-2">
-            <span className="px-2.5 py-0.5 rounded-full bg-vyvia-rose/20 text-vyvia-rose text-[10px] font-bold uppercase tracking-wider border border-vyvia-rose/30">
+            <span className="px-2 py-0.5 rounded bg-stone-800 text-stone-300 text-[10px] font-mono uppercase tracking-wider">
               Pre-Launch Application
             </span>
-            <span className="text-vyvia-sand/70 text-xs">
+            <span className="text-stone-400 text-xs font-mono">
               Inventors Anshika &amp; Shubham
             </span>
           </div>
 
           <h2 className="font-serif text-2xl sm:text-3xl font-light text-white">
-            VIP Early Access &amp; Waitlist
+            VIP Early Access Waitlist
           </h2>
-          <p className="text-xs text-vyvia-sand/80 mt-1 max-w-md">
-            Reserve your early allocation prior to commercial worldwide release. Zero purchase required today.
+          <p className="text-xs text-stone-300 mt-1 max-w-md">
+            Reserve your allocation for the first production run. Zero purchase required today.
           </p>
 
           {/* Applicant Type Selector */}
@@ -327,7 +320,7 @@ export const PreOrderModal: React.FC<PreOrderModalProps> = ({
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full py-3.5 rounded-xl bg-vyvia-forest text-vyvia-cream font-semibold text-xs sm:text-sm hover:bg-vyvia-leaf transition-all shadow-md flex items-center justify-center gap-2 disabled:opacity-70"
+                  className="w-full py-3.5 rounded-xl bg-[#1A3326] text-white font-medium text-xs sm:text-sm hover:bg-[#234534] transition-all shadow-sm flex items-center justify-center gap-2 disabled:opacity-70"
                 >
                   {loading ? (
                     <>
@@ -335,10 +328,7 @@ export const PreOrderModal: React.FC<PreOrderModalProps> = ({
                       <span>Reserving Early Allocation...</span>
                     </>
                   ) : (
-                    <>
-                      <Sparkles className="w-4 h-4 text-vyvia-rose" />
-                      <span>Submit VIP Waitlist Application</span>
-                    </>
+                    <span>Submit VIP Waitlist Application</span>
                   )}
                 </button>
               </div>

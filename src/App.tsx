@@ -3,25 +3,16 @@ import { LaunchBanner } from './components/LaunchBanner';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { TheBreakthrough } from './components/TheBreakthrough';
-import { InnovationStudio, StudioTab } from './components/InnovationStudio';
+import { PadArchitecture } from './components/PadArchitecture';
 import { CustomerTestimonials } from './components/CustomerTestimonials';
 import { PatentWhitepaper } from './components/PatentWhitepaper';
 import { PreOrderModal } from './components/PreOrderModal';
 import { WhatsAppButton } from './components/WhatsAppButton';
 import { Footer } from './components/Footer';
-import { BackgroundMotionGraphic } from './components/BackgroundMotionGraphic';
-import { CinematicMotionPlayer } from './components/CinematicMotionPlayer';
-import { Sparkles } from 'lucide-react';
 
 export function App() {
   const [isEarlyAccessOpen, setIsEarlyAccessOpen] = useState(false);
   const [selectedFlow, setSelectedFlow] = useState<string>('medium');
-  const [toastMessage, setToastMessage] = useState<string | null>(null);
-
-  const showToast = (msg: string) => {
-    setToastMessage(msg);
-    setTimeout(() => setToastMessage(null), 3000);
-  };
 
   const handleOpenEarlyAccess = (flow: string = 'medium') => {
     setSelectedFlow(flow);
@@ -36,48 +27,32 @@ export function App() {
   };
 
   return (
-    <div className="min-h-screen bg-vyvia-ivory text-vyvia-charcoal font-sans selection:bg-vyvia-mint selection:text-vyvia-forest relative">
-      {/* 60FPS Ambient Fluid Motion Graphic Canvas */}
-      <BackgroundMotionGraphic intensity="subtle" />
-
-      {/* Top Pre-Launch Announcement Bar */}
+    <div className="min-h-screen bg-[#FAFAF8] text-[#151D18] font-sans antialiased selection:bg-[#E2ECE6] selection:text-[#1A3326]">
+      {/* Top Pre-Launch Notice */}
       <LaunchBanner onClaimTrial={() => handleOpenEarlyAccess('medium')} />
-
-      {/* Toast Alert */}
-      {toastMessage && (
-        <div className="fixed top-24 right-5 z-50 bg-vyvia-forest text-vyvia-cream px-4 py-2.5 rounded-xl shadow-lg border border-vyvia-mint/30 text-xs font-semibold flex items-center gap-2 animate-bounce">
-          <Sparkles className="w-4 h-4 text-vyvia-rose" />
-          <span>{toastMessage}</span>
-        </div>
-      )}
 
       {/* Main Navbar */}
       <Navbar
         onOpenEarlyAccess={handleOpenEarlyAccess}
       />
 
-      <main className="relative z-10">
-        {/* 1. Hero Section: Punchy Value, Simple English, 3 Luxury Proof Cards */}
+      <main>
+        {/* 1. Hero: Editorial headline, simple English, real pad photograph on pedestal */}
         <Hero
           onOpenEarlyAccess={() => handleOpenEarlyAccess('medium')}
-          onExploreBreakthrough={() => scrollToSection('breakthrough')}
-          onExploreStudio={() => scrollToSection('studio')}
+          onExploreBreakthrough={() => scrollToSection('science')}
+          onExploreStudio={() => scrollToSection('layers')}
         />
 
-        {/* 2. The Breakthrough: Replaces bloated text with 3 simple steps + interactive comparison */}
+        {/* 2. The Science: Blood pH 7.4 vs Skin pH 4.8 + Split microscopy comparison + Direct comparison table */}
         <TheBreakthrough
           onJoinWaitlist={() => handleOpenEarlyAccess('medium')}
-          onExploreStudio={() => scrollToSection('studio')}
+          onExploreStudio={() => scrollToSection('layers')}
         />
 
-        {/* 3. 4K Cinematic Product Reel & Motion Graphics Engine */}
-        <CinematicMotionPlayer
+        {/* 3. Inside The Pad: 3D Exploded 5-layer cross-section + Luxury unboxing box showcase */}
+        <PadArchitecture
           onJoinWaitlist={() => handleOpenEarlyAccess('medium')}
-        />
-
-        {/* 4. The Innovation Studio: High-Class Hybrid Division (5 Tabs: Lab, Layers, Formulations, Roadmap, Quiz) */}
-        <InnovationStudio
-          onOpenWaitlist={(flow) => handleOpenEarlyAccess(flow || 'medium')}
         />
 
         {/* 4. Clinical Proof & Pilot Study Metrics */}
@@ -94,19 +69,15 @@ export function App() {
         defaultFlow={selectedFlow}
       />
 
-      {/* Floating Action Buttons bottom-right */}
+      {/* Bottom Floating CTA & Support */}
       <div className="fixed bottom-6 right-6 z-30 flex flex-col gap-2.5 items-end">
-        {/* WhatsApp Chat Support */}
         <WhatsAppButton />
 
-        {/* VIP Waitlist CTA Floating Pill */}
         <button
           onClick={() => handleOpenEarlyAccess('medium')}
-          className="px-4 py-3 bg-vyvia-forest text-vyvia-cream rounded-full shadow-elevated border border-vyvia-leaf hover:bg-vyvia-leaf transition-transform hover:scale-105 flex items-center gap-2 font-medium text-xs shadow-lg"
+          className="px-4 py-2.5 bg-[#1A3326] text-white rounded-full shadow-lg hover:bg-[#234534] transition-all flex items-center gap-2 font-medium text-xs tracking-wide"
         >
-          <Sparkles className="w-4 h-4 text-vyvia-rose" />
-          <span className="hidden sm:inline">Join VIP Waitlist (Pre-Launch)</span>
-          <span className="sm:hidden">Waitlist</span>
+          <span>Join Waitlist (Pre-Launch)</span>
         </button>
       </div>
 

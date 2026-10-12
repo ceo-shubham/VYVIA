@@ -13,9 +13,8 @@ export const Navbar: React.FC<NavbarProps> = ({
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navLinks = [
-    { label: 'The Breakthrough', href: '#breakthrough' },
-    { label: '4K Motion Reel', href: '#motion-reel' },
-    { label: 'Innovation Studio', href: '#studio' },
+    { label: 'The Science', href: '#science' },
+    { label: 'Inside The Pad', href: '#layers' },
     { label: 'Clinical Proof', href: '#results' },
     { label: 'Patent & Inventors', href: '#patent' },
   ];
@@ -29,35 +28,25 @@ export const Navbar: React.FC<NavbarProps> = ({
   };
 
   return (
-    <header className="sticky top-0 z-40 w-full glass-panel border-b border-vyvia-mint/70 transition-all">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+    <header className="sticky top-0 z-40 w-full bg-[#FAFAF8]/90 backdrop-blur-md border-b border-stone-200/80 transition-all">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 h-18 py-4 flex items-center justify-between">
         {/* Brand Logo */}
-        <a href="#" className="flex items-center gap-3 group">
-          <div className="w-11 h-11 rounded-full bg-vyvia-forest text-vyvia-cream flex items-center justify-center font-serif text-2xl font-bold tracking-wider shadow-md transition-transform group-hover:scale-105 border border-vyvia-sage/40">
-            V
-          </div>
-          <div className="flex flex-col">
-            <div className="flex items-center gap-2">
-              <span className="font-serif text-2xl font-semibold tracking-wider text-vyvia-forest uppercase leading-tight">
-                VYVIA
-              </span>
-              <span className="hidden sm:inline-block px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold uppercase tracking-wider">
-                Pre-Launch R&amp;D
-              </span>
-            </div>
-            <span className="text-[10px] tracking-widest text-vyvia-sage font-medium uppercase">
-              pH Balancing Protective Layer
-            </span>
-          </div>
+        <a href="#" className="flex items-center gap-3">
+          <span className="font-serif text-2xl font-semibold tracking-wider text-[#18201C] uppercase leading-tight">
+            VYVIA
+          </span>
+          <span className="text-[10px] tracking-widest text-stone-500 font-mono uppercase border-l border-stone-300 pl-3 hidden sm:inline">
+            Protective Layer
+          </span>
         </a>
 
         {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-8">
+        <nav className="hidden md:flex items-center gap-7">
           {navLinks.map((link) => (
             <button
               key={link.label}
               onClick={() => handleLinkClick(link.href)}
-              className="text-xs font-semibold text-vyvia-charcoal/80 hover:text-vyvia-forest transition-colors hover:border-b-2 hover:border-vyvia-leaf/70 py-1"
+              className="text-xs font-medium text-stone-600 hover:text-stone-950 transition-colors py-1 tracking-wide"
             >
               {link.label}
             </button>
@@ -68,11 +57,9 @@ export const Navbar: React.FC<NavbarProps> = ({
         <div className="hidden md:flex items-center gap-3">
           <button
             onClick={() => onOpenEarlyAccess()}
-            className="flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold bg-vyvia-forest text-vyvia-cream hover:bg-vyvia-leaf transition-all shadow-sm hover:shadow group"
+            className="px-4 py-2 rounded-full text-xs font-medium bg-[#1A3326] text-white hover:bg-[#234534] transition-all tracking-wide"
           >
-            <Sparkles className="w-3.5 h-3.5 text-vyvia-rose group-hover:rotate-12 transition-transform" />
-            <span>Join VIP Waitlist</span>
-            <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+            Join Waitlist
           </button>
         </div>
 
